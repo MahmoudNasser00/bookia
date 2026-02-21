@@ -1,123 +1,171 @@
-import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
 import 'package:easy_localization/easy_localization.dart';
-import '../localization/locale_keys.g.dart';
+import 'package:flutter/services.dart';
+
+import '../../localization/locale_keys.g.dart';
 
 sealed class AppFormValidations {
-  /// Name Validation
-  // Allows letters, numbers, underscores, dots, and dashes.
-  static final List<TextInputFormatter> userNameFormater = [
-    FilteringTextInputFormatter.allow(
-      RegExp(r'^[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FFa-zA-Z0-9]*$'),
-    ),
+  AppFormValidations._(); // prevent instantiation
+
+  /* ===========================
+        USERNAME
+  ============================ */
+
+  static final List<TextInputFormatter> userNameFormatter = [
+    FilteringTextInputFormatter.allow(RegExp(r'[\u0600-\u06FFa-zA-Z0-9_.-]')),
   ];
+
+  static final RegExp _userNameRegex = RegExp(
+    r'^[\u0600-\u06FFa-zA-Z0-9_.-]{3,16}$',
+  );
+
   static String? userNameValidator(String? value) {
-    const userNamePattern =
-        r'^[a-zA-Z0-9_.-]{3,16}$'; // Adjust length limits as needed.
-    if (value == null || value.isEmpty) {
+    final input = value?.trim();
+
+    if (input == null || input.isEmpty) {
       return LocaleKeys.usernameIsRequired.tr();
-    } else if (!RegExp(userNamePattern).hasMatch(value)) {
+    }
+
+    if (!_userNameRegex.hasMatch(input)) {
       return LocaleKeys.userNameMustBe316Character.tr();
     }
+
     return null;
   }
 
-  /// Email Validation
-  // Email Input Formatter: Allows only valid email characters.
-  static final List<TextInputFormatter> emailFormater = [
+  /* ===========================
+        EMAIL
+  ============================ */
+
+  static final List<TextInputFormatter> emailFormatter = [
     FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9@._\-]')),
   ];
 
-  static final emailRegex = RegExp(
-    r'^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$',
-  );
+  static final RegExp _emailRegex = RegExp(r'^[\w\.-]+@([\w-]+\.)+[\w-]{2,}$');
 
-  static String? emailValidation(String? value) {
-    if (value == null || value.isEmpty) {
+  static String? emailValidator(String? value) {
+    final input = value?.trim();
+
+    if (input == null || input.isEmpty) {
       return LocaleKeys.emailIsRequired.tr();
-    } else if (!AppFormValidations.emailRegex.hasMatch(value)) {
+    }
+
+    if (!_emailRegex.hasMatch(input)) {
       return LocaleKeys.enterValidEmail.tr();
     }
+
     return null;
   }
 
-  static String? emailAndPhoneValidation(String? value) {
-    if (value == null || value.isEmpty) {
+  static String? emailOrPhoneValidator(String? value) {
+    final input = value?.trim();
+
+    if (input == null || input.isEmpty) {
       return LocaleKeys.emailIsRequired.tr();
-    } else if (!emailRegex.hasMatch(value) && !phoneRegex.hasMatch(value)) {
+    }
+
+    if (!_emailRegex.hasMatch(input) && !_egyptPhoneRegex.hasMatch(input)) {
       return LocaleKeys.enterValidEmailOrPhoneNumber.tr();
     }
+
     return null;
   }
 
-  static final phoneRegex = RegExp(
-    r'^\+?[1-9]\d{1,14}$|^(\+?\d{1,3})?(\d{10})$|^(\d{3})[-.\s]?\d{3}[-.\s]?\d{4}$',
-  );
+  /* ===========================
+        PHONE
+  ============================ */
 
-  /// Otp Validation
-  static final List<TextInputFormatter> otpFormater = [
-    FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+  // Egyptian phone number example
+  static final RegExp _egyptPhoneRegex = RegExp(r'^01[0-9]{9}$');
+
+  static final List<TextInputFormatter> phoneFormatter = [
+    FilteringTextInputFormatter.digitsOnly,
+    LengthLimitingTextInputFormatter(11),
   ];
 
-  static String? otpValidation(String? value) {
-    if (value == null || value.isEmpty) {
-      return LocaleKeys.codeIsRequired.tr();
-    } else if (value.length != 6) {
-      return LocaleKeys.enterValidCode.tr();
+  static String? phoneValidator(String? value) {
+    final input = value?.trim();
+
+    if (input == null || input.isEmpty) {
+      return LocaleKeys.phoneNumberIsRequired.tr();
     }
+
+    if (!_egyptPhoneRegex.hasMatch(input)) {
+      return LocaleKeys.enterValidPhoneNumber.tr();
+    }
+
     return null;
   }
 
-  /// Password Validation
-  // Password Input Formatter: Allows alphanumeric and special characters (e.g., !@#$%^&*).
-  static final List<TextInputFormatter> passwordFormater = [
+  /* ===========================
+        OTP
+  ============================ */
+
+  static final List<TextInputFormatter> otpFormatter = [
+    FilteringTextInputFormatter.digitsOnly,
+    LengthLimitingTextInputFormatter(6),
+  ];
+
+  static String? otpValidator(String? value) {
+    final input = value?.trim();
+
+    if (input == null || input.isEmpty) {
+      return LocaleKeys.codeIsRequired.tr();
+    }
+
+    if (input.length != 6) {
+      return LocaleKeys.enterValidCode.tr();
+    }
+
+    return null;
+  }
+
+  /* ===========================
+        PASSWORD
+  ============================ */
+
+  static final List<TextInputFormatter> passwordFormatter = [
     FilteringTextInputFormatter.allow(
       RegExp(r'[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};:"\\|,.<>/?~` ]'),
     ),
   ];
 
-  static String? passwordValidation(String? value) {
-    if (kDebugMode) return null;
-    if (value == null || value.isEmpty) {
+  static String? passwordValidator(String? value) {
+    final input = value?.trim();
+
+    if (input == null || input.isEmpty) {
       return LocaleKeys.passwordIsRequired.tr();
-    } else if (value.length < 8) {
+    }
+
+    if (input.length < 8) {
       return LocaleKeys.passwordMustBeAtLeast8Characters.tr();
-    } else if (!RegExp(r'[a-zA-Z]').hasMatch(value)) {
+    }
+
+    if (!RegExp(r'[A-Za-z]').hasMatch(input)) {
       return LocaleKeys.passwordMustContainLetters.tr();
-    } else if (!RegExp(r'[0-9]').hasMatch(value)) {
+    }
+
+    if (!RegExp(r'\d').hasMatch(input)) {
       return LocaleKeys.passwordMustContainNumbers.tr();
     }
+
     return null;
   }
 
-  static String? confirmPasswordValidation(
+  static String? confirmPasswordValidator(
     String? confirmPassword,
     String? password,
   ) {
-    if (confirmPassword == null || confirmPassword.isEmpty) {
+    final confirm = confirmPassword?.trim();
+    final pass = password?.trim();
+
+    if (confirm == null || confirm.isEmpty) {
       return LocaleKeys.passwordIsRequired.tr();
-    } else if (confirmPassword.length < 8) {
-      return LocaleKeys.passwordMustBeAtLeast8Characters.tr();
-    } else if (confirmPassword != password) {
+    }
+
+    if (confirm != pass) {
       return LocaleKeys.passwordsDoNotMatch.tr();
     }
-    return null;
-  }
 
-  /// Phone Number Validation
-  // Allows digits, spaces, plus (+), and hyphens (-).
-  static final List<TextInputFormatter> phoneNumberFormatter = [
-    FilteringTextInputFormatter.allow(RegExp(r'[0-9]')), // Allow only digits
-    LengthLimitingTextInputFormatter(11), // Limit input length to 11
-  ];
-
-  static String? phoneNumberValidator(String? value) {
-    const phoneNumberPattern = r'^\d{11}$'; // Match exactly 11 digits
-    if (value == null || value.isEmpty) {
-      return LocaleKeys.phoneNumberIsRequired.tr();
-    } else if (!RegExp(phoneNumberPattern).hasMatch(value)) {
-      return LocaleKeys.enterValidPhoneNumber.tr();
-    }
     return null;
   }
 }

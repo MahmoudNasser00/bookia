@@ -5,19 +5,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../helpers/storage/pref_helper.dart';
+import '../helpers/storage/pref_keys.dart';
+
 sealed class AppMethods {
   /// todo; use global key context
-  static Future<void> appLaunchUrl(
-    BuildContext context, {
-    required String urlLink,
-  }) async {
-    final url = Uri.parse(urlLink);
-    if (!await launchUrl(url)) {
-      if (context.mounted) {
-        context.showSnackBar('Could not launch $urlLink');
-      }
-    }
-  }
 
   static String dateTimeFormat(DateTime date) {
     final String result = DateFormat('yyyy-MM-dd').format(date);
@@ -117,12 +109,20 @@ sealed class AppMethods {
     BuildContext context, {
     required Locale locale,
   }) async {
-    await EasyLocalization.of(context)!.setLocale(locale);
+    final easy = EasyLocalization.of(context);
+
+    if (easy == null) return;
+
+    if (easy.currentLocale == locale) return;
+
+    await easy.setLocale(locale);
+
     await PrefHelper.save(PrefKeys.currentLanguage, locale.languageCode);
-    // DioConsumer().setDioOptions();
   }
 
-  static void logout() {
-    PrefHelper.remove(PrefKeys.token);
+  static Future<void> logout() async {
+    await PrefHelper.remove(PrefKeys.token);
+
+    await PrefHelper.clear();
   }
 }
