@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/services.dart';
 
-import '../../localization/locale_keys.g.dart';
+import '../../localization/generated/locale_keys.g.dart';
 
 sealed class AppFormValidations {
   AppFormValidations._(); // prevent instantiation

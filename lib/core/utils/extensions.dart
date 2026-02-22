@@ -3,19 +3,30 @@ import 'package:flutter/material.dart';
 
 import '../app_themes/colors/app_colors.dart';
 
-/// ==========================
 /// MediaQuery
-/// ==========================
 
-extension MediaQueryX on BuildContext {
-  double get height => MediaQuery.sizeOf(this).height;
-  double get width => MediaQuery.sizeOf(this).width;
-  double get topPadding => MediaQuery.of(this).viewPadding.top;
-  double get bottomInset => MediaQuery.of(this).viewInsets.bottom;
+extension ResponsiveX on BuildContext {
+  Size get screenSize => MediaQuery.sizeOf(this);
+
+  double get screenWidth => screenSize.width;
+  double get screenHeight => screenSize.height;
+
+  double get keyboardInset => MediaQuery.of(this).viewInsets.bottom;
+
+  double get topSafeArea => MediaQuery.of(this).padding.top;
 
   Orientation get orientation => MediaQuery.of(this).orientation;
+
   bool get isLandscape => orientation == Orientation.landscape;
+
   bool get isPortrait => orientation == Orientation.portrait;
+
+  /// Breakpoints
+  bool get isMobile => screenWidth < 600;
+
+  bool get isTablet => screenWidth >= 600 && screenWidth < 1024;
+
+  bool get isDesktop => screenWidth >= 1024;
 }
 
 /// ==========================

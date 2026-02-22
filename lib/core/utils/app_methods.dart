@@ -9,8 +9,6 @@ import '../helpers/storage/pref_helper.dart';
 import '../helpers/storage/pref_keys.dart';
 
 sealed class AppMethods {
-  /// todo; use global key context
-
   static String dateTimeFormat(DateTime date) {
     final String result = DateFormat('yyyy-MM-dd').format(date);
     return result;
