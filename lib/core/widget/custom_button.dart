@@ -1,3 +1,4 @@
+import 'package:bookia/core/app_themes/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -33,12 +34,12 @@ class CustomButton extends StatelessWidget {
       ),
       child: Text(
         text,
-        style: GoogleFonts.playfairDisplay(
-          textStyle: Theme.of(context).textTheme.displayLarge,
+        style: AppTextStyles.playfairDisplayLarge(
+          context,
+          color: textColor,
           fontSize: 20.sp,
           fontWeight: FontWeight.w400,
           fontStyle: FontStyle.italic,
-          color: textColor,
         ),
       ),
     );

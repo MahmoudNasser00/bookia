@@ -74,7 +74,6 @@ sealed class AppFormValidations {
         PHONE
   ============================ */
 
-  // Egyptian phone number example
   static final RegExp _egyptPhoneRegex = RegExp(r'^01[0-9]{9}$');
 
   static final List<TextInputFormatter> phoneFormatter = [
@@ -138,10 +137,6 @@ sealed class AppFormValidations {
 
     if (input.length < 8) {
       return LocaleKeys.passwordMustBeAtLeast8Characters.tr();
-    }
-
-    if (!RegExp(r'[A-Za-z]').hasMatch(input)) {
-      return LocaleKeys.passwordMustContainLetters.tr();
     }
 
     if (!RegExp(r'\d').hasMatch(input)) {

@@ -1,3 +1,4 @@
+import 'package:bookia/core/app_themes/app_text_styles.dart';
 import 'package:bookia/core/app_themes/colors/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,6 +14,7 @@ class CustomTextfield extends StatefulWidget {
   final Widget? suffixIcon;
   final bool enabled;
   final int maxLines;
+  final dynamic inputFormatters;
 
   const CustomTextfield({
     super.key,
@@ -25,6 +27,7 @@ class CustomTextfield extends StatefulWidget {
     this.suffixIcon,
     this.enabled = true,
     this.maxLines = 1,
+    this.inputFormatters,
   });
 
   @override
@@ -49,11 +52,11 @@ class _CustomTextfieldState extends State<CustomTextfield> {
       obscureText: _obscure,
       enabled: widget.enabled,
       maxLines: widget.maxLines,
-      style: GoogleFonts.playfairDisplay(
-        textStyle: Theme.of(context).textTheme.displayLarge,
-        fontSize: 18.sp,
-        fontWeight: FontWeight.w400,
-        fontStyle: FontStyle.normal,
+      inputFormatters: widget.inputFormatters,
+      style: AppTextStyles.playfairDisplayLarge(
+        context,
+        color: AppColors.hintColor,
+        fontSize: 15.sp,
       ),
       decoration: InputDecoration(
         hintText: widget.hintText,
