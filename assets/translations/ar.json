@@ -69,6 +69,10 @@
     "passwordsDoNotMatch": "كلمتا المرور غير متطابقتين",
   "or": "او عن طريق",
   "sign_in_with_google": "تسجيل الدخول باستخدام جوجل",
-  "sign_in_with_apple": "تسجيل الدخول باستخدام ابل"
-
+  "sign_in_with_apple": "تسجيل الدخول باستخدام ابل",
+  "login_now": "سجيل الدخول",
+  "Enter_the_verification_code_we_just_sent_on_your_email_address": "أدخل رمز التحقق الذي أرسلناه للتو إلى بريدك الإلكتروني.",
+  "Don't worry! It occurs. Please enter the email address linked with your account": "لا تقلق! هذا يحدث. يرجى إدخال عنوان البريد الإلكتروني المرتبط بحسابك.",
+  "Your new password must be unique from those previously used": "يجب أن تكون كلمة المرور الجديدة الخاصة بك فريدة من نوعها وتختلف عن كلمات المرور التي استخدمتها سابقاً.",
+  "Your password has been changed successfully": "تم تغيير كلمة مرورك بنجاح."
 }

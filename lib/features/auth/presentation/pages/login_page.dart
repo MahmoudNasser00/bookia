@@ -146,43 +146,44 @@ class _LoginPageState extends State<LoginPage> {
                 width: 329.w,
                 height: 56.h,
               ),
-              Center(
-                child: Row(
-                  spacing: 1.w,
-                  crossAxisAlignment: .center,
-                  mainAxisAlignment: .center,
-                  mainAxisSize: .max,
-                  children: [
-                    Text(
-                      LocaleKeys.dont_have_account,
-                      style: AppTextStyles.playfairDisplayLarge(
-                        context,
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 14.sp,
-                        color: AppColors.black,
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, AppRoutes.register);
-                      },
-                      child: Text(
-                        LocaleKeys.register,
-                        style: AppTextStyles.playfairDisplayLarge(
-                          context,
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14.sp,
-                          color: AppColors.primary_button_color,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
             ],
           ),
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: EdgeInsets.only(bottom: 22.h),
+        child: Row(
+          spacing: 1.w,
+          crossAxisAlignment: .center,
+          mainAxisAlignment: .center,
+          mainAxisSize: .max,
+          children: [
+            Text(
+              LocaleKeys.dont_have_account,
+              style: AppTextStyles.playfairDisplayLarge(
+                context,
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w400,
+                fontSize: 14.sp,
+                color: AppColors.black,
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, AppRoutes.register);
+              },
+              child: Text(
+                LocaleKeys.register,
+                style: AppTextStyles.playfairDisplayLarge(
+                  context,
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 14.sp,
+                  color: AppColors.primary_button_color,
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

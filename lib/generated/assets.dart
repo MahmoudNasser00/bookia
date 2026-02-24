@@ -3,8 +3,8 @@ class Assets {
   Assets._();
 
   static const String iconsLogo = 'assets/icons/logo.svg';
+  static const String iconsSuccessfully = 'assets/icons/successfully';
   static const String imagesBackground = 'assets/images/background.png';
   static const String translationsAr = 'assets/translations/ar.json';
   static const String translationsEn = 'assets/translations/en.json';
-  static const String iconsSuccessfully = 'assets/icons/successfully.svg';
 }

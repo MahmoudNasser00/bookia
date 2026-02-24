@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../features/auth/logic/verify_source.dart';
+import '../../features/auth/presentation/pages/password_change_page.dart';
 import '../../features/auth/presentation/pages/welcome.dart';
 import 'app_routes_name.dart';
 
@@ -47,10 +49,13 @@ class RouteGenerator {
         return _route(settings, const ForgotPasswordPage());
 
       case AppRoutes.verifyCode:
-        return _route(settings, const VerifyCodePage());
+        final source = settings.arguments as VerifySource;
+        return _route(settings, VerifyCodePage(source: source));
 
       case AppRoutes.resetPassword:
         return _route(settings, const ResetPasswordPage());
+      case AppRoutes.passwordChange:
+        return _route(settings, const PasswordChangePage());
 
       /// Home
       case AppRoutes.home:

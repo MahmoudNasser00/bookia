@@ -5,7 +5,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../../core/app_themes/app_text_styles.dart';
+import '../../../../core/app_themes/colors/app_colors.dart';
 import '../../../../core/generated/assets.dart';
 
 class SplashPage extends StatefulWidget {
@@ -92,9 +93,10 @@ class _SplashPageState extends State<SplashPage>
                   builder: (_, __) {
                     return Text(
                       LocaleKeys.order_now.tr(),
-                      style: GoogleFonts.jockeyOne(
-                        textStyle: Theme.of(context).textTheme.displayLarge,
+                      style: AppTextStyles.playfairDisplayLarge(
+                        context,
                         fontSize: 20.sp,
+                        color: AppColors.black,
                         fontWeight: FontWeight.w400,
                         fontStyle: FontStyle.italic,
                       ),

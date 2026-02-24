@@ -1,16 +1,17 @@
+import 'package:bookia/features/auth/logic/verify_source.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/app_routes/app_routes_name.dart';
 
-Future<void> logIn({
+Future<void> forgotPassword({
   required BuildContext context,
   required GlobalKey<FormState> formKey,
 }) async {
   if (formKey.currentState!.validate()) {
-    Navigator.pushNamedAndRemoveUntil(
+    Navigator.pushNamed(
       context,
-      AppRoutes.home,
-      (route) => false,
+      AppRoutes.verifyCode,
+      arguments: VerifySource.forgotPassword,
     );
   }
 }

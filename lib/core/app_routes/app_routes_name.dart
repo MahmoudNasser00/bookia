@@ -13,4 +13,5 @@ sealed class AppRoutes {
   static const String editProfile = '/edit-profile';
   static const String search = '/search';
   static const String checkout = '/checkout';
+  static const String passwordChange = '/password-change';
 }

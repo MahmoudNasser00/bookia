@@ -1,0 +1,1 @@
+enum VerifySource { register, forgotPassword }
