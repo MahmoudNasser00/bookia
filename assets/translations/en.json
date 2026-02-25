@@ -42,7 +42,6 @@
     "profile_title": "Profile",
     "my_orders": "My Orders",
     "edit_profile": "Edit Profile",
-    "faq": "FAQ",
     "contact_us": "Contact Us",
     "privacy_terms": "Privacy & Terms",
 
@@ -75,7 +74,7 @@
   "sign_in_with_google": "Sign in with Google",
   "sign_in_with_apple": "Sign in with Apple",
   "Enter_the_verification_code_we_just_sent_on_your_email_address": "Enter the verification code we just sent on your email address.",
-  "Don't worry! It occurs. Please enter the email address linked with your account": "Don't worry! It occurs. Please enter the email address linked with your account.",
-  "Your new password must be unique from those previously used": "Your new password must be unique from those previously used.",
-  "Your password has been changed successfully": "Your password has been changed successfully."
+  "Dont_worry_It_occurs_Please_enter_the_email_address_linked_with_your_account": "Don't worry! It occurs. Please enter the email address linked with your account.",
+  "Your_new_password_must_be_unique_from_those_previously_used": "Your new password must be unique from those previously used.",
+  "Your_password_has_been_changed_successfully": "Your password has been changed successfully."
 }

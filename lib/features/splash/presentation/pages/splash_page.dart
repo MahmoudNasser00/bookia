@@ -25,6 +25,7 @@ class _SplashPageState extends State<SplashPage>
 
   late AnimationController _controller;
   late Animation<double> _fontAnimation;
+  final orderNowText = LocaleKeys.order_now.tr();
 
   @override
   void initState() {
@@ -73,41 +74,16 @@ class _SplashPageState extends State<SplashPage>
   @override
   Widget build(BuildContext context) {
     final width = 1.sw;
-    final height = 1.sh;
 
     return Scaffold(
-      body: Stack(
-        children: [
-          Column(
-            children: [
-              AnimatedContainer(
-                duration: const Duration(milliseconds: 2000),
-                curve: Curves.fastLinearToSlowEaseIn,
-                height: height / _fontSizeFactor,
-              ),
-              AnimatedOpacity(
-                duration: const Duration(milliseconds: 1000),
-                opacity: _textOpacity,
-                child: AnimatedBuilder(
-                  animation: _controller,
-                  builder: (_, __) {
-                    return Text(
-                      LocaleKeys.order_now.tr(),
-                      style: AppTextStyles.playfairDisplayLarge(
-                        context,
-                        fontSize: 20.sp,
-                        color: AppColors.black,
-                        fontWeight: FontWeight.w400,
-                        fontStyle: FontStyle.italic,
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
-          Center(
-            child: AnimatedOpacity(
+      body: Center(
+        child: Column(
+          crossAxisAlignment: .center,
+          mainAxisAlignment: .center,
+          mainAxisSize: .min,
+          spacing: 10.h,
+          children: [
+            AnimatedOpacity(
               duration: const Duration(milliseconds: 2000),
               opacity: _containerOpacity,
               child: AnimatedContainer(
@@ -122,8 +98,28 @@ class _SplashPageState extends State<SplashPage>
                 ),
               ),
             ),
-          ),
-        ],
+
+            AnimatedOpacity(
+              duration: const Duration(milliseconds: 1000),
+              opacity: _textOpacity,
+              child: AnimatedBuilder(
+                animation: _controller,
+                builder: (_, __) {
+                  return Text(
+                    orderNowText,
+                    style: AppTextStyles.playfairDisplayLarge(
+                      context,
+                      fontSize: _fontAnimation.value,
+                      color: AppColors.black,
+                      fontWeight: FontWeight.w400,
+                      fontStyle: FontStyle.italic,
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

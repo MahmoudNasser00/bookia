@@ -9,6 +9,7 @@ class CustomButton extends StatelessWidget {
   final dynamic textColor;
   final dynamic width;
   final dynamic height;
+  final Widget? leading;
 
   const CustomButton({
     Key? key,
@@ -18,6 +19,7 @@ class CustomButton extends StatelessWidget {
     required this.textColor,
     required this.width,
     required this.height,
+    this.leading,
   }) : super(key: key);
 
   @override
@@ -31,15 +33,21 @@ class CustomButton extends StatelessWidget {
         ),
         fixedSize: Size(width, height),
       ),
-      child: Text(
-        text,
-        style: AppTextStyles.playfairDisplayLarge(
-          context,
-          color: textColor,
-          fontSize: 20.sp,
-          fontWeight: FontWeight.w400,
-          fontStyle: FontStyle.italic,
-        ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          if (leading != null) ...[leading!, SizedBox(width: 8.w)],
+          Text(
+            text,
+            style: AppTextStyles.playfairDisplayLarge(
+              context,
+              color: textColor,
+              fontSize: 20.sp,
+              fontWeight: FontWeight.w400,
+              fontStyle: FontStyle.italic,
+            ),
+          ),
+        ],
       ),
     );
   }

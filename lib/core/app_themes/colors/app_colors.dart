@@ -8,6 +8,7 @@ sealed class AppColors {
   /// Text Form Colors
   static const Color labelTextColor = black;
   static const Color hintColor = Color(0xFF8391A1);
+  static const Color backButtonColor = Color(0xFFE8ECF4);
   static const Color text_field_color = Color(0xffe8ecf4);
 
   /// Error

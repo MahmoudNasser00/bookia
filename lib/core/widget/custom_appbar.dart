@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
+import '../app_themes/colors/app_colors.dart';
+import '../generated/assets.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
   final bool showBackButton;
+  final bool showAppIcon;
   final VoidCallback? onBackPressed;
   final List<Widget>? actions;
   final Color? backgroundColor;
@@ -13,6 +18,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     super.key,
     this.title,
     this.showBackButton = true,
+    this.showAppIcon = false,
     this.onBackPressed,
     this.actions,
     this.backgroundColor,
@@ -22,26 +28,35 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      toolbarHeight: 80.h,
       backgroundColor: backgroundColor,
+      leadingWidth: 80.w,
       centerTitle: centerTitle,
-      leadingWidth: showBackButton ? 80.w : 0,
       leading: showBackButton
           ? Padding(
-              padding: EdgeInsets.only(top: 24.w, left: 24.w),
-              child: InkWell(
-                borderRadius: BorderRadius.circular(20.r),
-                onTap: onBackPressed ?? () => Navigator.pop(context),
-                child: Container(
-                  height: 41.h,
-                  width: 41.w,
-                  decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 232, 236, 244),
-                    borderRadius: BorderRadius.circular(20.r),
-                  ),
-                  child: Icon(Icons.arrow_back_ios_new, size: 19.sp),
-                ),
-              ),
+              padding: EdgeInsets.only(left: 5.w, right: 5.w),
+              child: showAppIcon
+                  ? SvgPicture.asset(
+                      Assets.iconsLogo,
+                      width: 99.w,
+                      height: 30.w,
+                    )
+                  : IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: Container(
+                        width: 41.w,
+                        height: 41.w,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10.r),
+                          color: AppColors.backButtonColor,
+                        ),
+                        child: Icon(Icons.arrow_back_ios_new, size: 15.sp),
+                      ),
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      alignment: Alignment.center,
+                    ),
             )
           : null,
       title: title != null

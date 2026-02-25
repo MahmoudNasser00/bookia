@@ -50,7 +50,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               SizedBox(height: 10.h),
               Text(
                 LocaleKeys
-                    .Don_t_worry_It_occurs_Please_enter_the_email_address_linked_with_your_account.tr(),
+                    .Dont_worry_It_occurs_Please_enter_the_email_address_linked_with_your_account.tr(),
                 style: AppTextStyles.playfairDisplayLarge(
                   context,
                   fontSize: 16.sp,

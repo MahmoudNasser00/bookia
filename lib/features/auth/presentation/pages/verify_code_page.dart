@@ -39,7 +39,11 @@ class _VerifyCodePageState extends State<VerifyCodePage> {
     if (_formKey.currentState!.validate()) {
       switch (widget.source) {
         case VerifySource.register:
-          Navigator.pushReplacementNamed(context, AppRoutes.home);
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            AppRoutes.home,
+            (route) => false,
+          );
           break;
 
         case VerifySource.forgotPassword:

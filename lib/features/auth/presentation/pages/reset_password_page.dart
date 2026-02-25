@@ -71,7 +71,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
               ), // password
               SizedBox(height: 32.h),
               CustomTextfield(
-                hintText: LocaleKeys.password.tr(),
+                hintText: LocaleKeys.new_password.tr(),
                 isPassword: true,
                 controller: passwordController,
                 keyboardType: TextInputType.visiblePassword,

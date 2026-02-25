@@ -39,7 +39,6 @@
     "profile_title": "الملف الشخصي",
     "my_orders": "طلباتي",
     "edit_profile": "تعديل الملف الشخصي",
-    "faq": "الأسئلة الشائعة",
     "contact_us": "تواصل معنا",
     "privacy_terms": "الخصوصية والشروط",
     "place_order": "إتمام الطلب",
@@ -51,8 +50,8 @@
     "remember_password": "تذكرت كلمة المرور؟",
     "didnt_receive_code": "لم تستلم الرمز؟",
     "resend": "إعادة الإرسال",
-    "password_changed_success": "تم تغيير كلمة المرور بنجاح.",
-    "order_success": "سيتم توصيل طلبك قريبًا. شكرًا لاستخدامك تطبيقنا!",
+    "password_changed_success": "تم تغيير كلمة المرور بنجاح",
+    "order_success": "سيتم توصيل طلبك قريبًا شكرًا لاستخدامك تطبيقنا!",
     "usernameIsRequired": "اسم المستخدم مطلوب",
     "userNameMustBe316Character": "اسم المستخدم يجب أن يكون بين 3 و 16 حرف",
     "emailIsRequired": "البريد الإلكتروني مطلوب",
@@ -70,9 +69,9 @@
   "or": "او عن طريق",
   "sign_in_with_google": "تسجيل الدخول باستخدام جوجل",
   "sign_in_with_apple": "تسجيل الدخول باستخدام ابل",
-  "login_now": "سجيل الدخول",
-  "Enter_the_verification_code_we_just_sent_on_your_email_address": "أدخل رمز التحقق الذي أرسلناه للتو إلى بريدك الإلكتروني.",
-  "Don't worry! It occurs. Please enter the email address linked with your account": "لا تقلق! هذا يحدث. يرجى إدخال عنوان البريد الإلكتروني المرتبط بحسابك.",
-  "Your new password must be unique from those previously used": "يجب أن تكون كلمة المرور الجديدة الخاصة بك فريدة من نوعها وتختلف عن كلمات المرور التي استخدمتها سابقاً.",
-  "Your password has been changed successfully": "تم تغيير كلمة مرورك بنجاح."
+  "login_now": "تسجيل الدخول",
+  "Enter_the_verification_code_we_just_sent_on_your_email_address": "أدخل رمز التحقق الذي أرسلناه للتو إلى بريدك الإلكتروني",
+  "Dont_worry_It_occurs_Please_enter_the_email_address_linked_with_your_account": "لا تقلق! هذا يحدث يرجى إدخال عنوان البريد الإلكتروني المرتبط بحسابك",
+  "Your_new_password_must_be_unique_from_those_previously_used": "يجب أن تكون كلمة المرور الجديدة الخاصة بك فريدة من نوعها وتختلف عن كلمات المرور التي استخدمتها سابقاً",
+  "Your_password_has_been_changed_successfully": "تم تغيير كلمة مرورك بنجاح"
 }

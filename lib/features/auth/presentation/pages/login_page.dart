@@ -9,8 +9,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:bookia/core/helpers/validations/app_form_validations.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/app_themes/app_text_styles.dart';
+import '../../../../core/generated/assets.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -130,7 +132,8 @@ class _LoginPageState extends State<LoginPage> {
               ),
               SizedBox(height: 30.h),
               CustomButton(
-                text: LocaleKeys.sign_in_with_google,
+                text: LocaleKeys.sign_in_with_google.tr(),
+                leading: SvgPicture.asset(Assets.iconsGoogle),
                 onPressed: () {},
                 color: AppColors.white,
                 textColor: AppColors.black,
@@ -139,7 +142,12 @@ class _LoginPageState extends State<LoginPage> {
               ),
               SizedBox(height: 15.h),
               CustomButton(
-                text: LocaleKeys.sign_in_with_apple,
+                leading: SvgPicture.asset(
+                  Assets.iconsApple,
+                  width: 26.w,
+                  height: 26.w,
+                ),
+                text: LocaleKeys.sign_in_with_apple.tr(),
                 onPressed: () {},
                 color: AppColors.white,
                 textColor: AppColors.black,
@@ -159,7 +167,7 @@ class _LoginPageState extends State<LoginPage> {
           mainAxisSize: .max,
           children: [
             Text(
-              LocaleKeys.dont_have_account,
+              LocaleKeys.dont_have_account.tr(),
               style: AppTextStyles.playfairDisplayLarge(
                 context,
                 fontStyle: FontStyle.normal,
@@ -173,7 +181,7 @@ class _LoginPageState extends State<LoginPage> {
                 Navigator.pushNamed(context, AppRoutes.register);
               },
               child: Text(
-                LocaleKeys.register,
+                LocaleKeys.register.tr(),
                 style: AppTextStyles.playfairDisplayLarge(
                   context,
                   fontStyle: FontStyle.normal,
