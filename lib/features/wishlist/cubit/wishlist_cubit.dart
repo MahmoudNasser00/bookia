@@ -45,12 +45,20 @@ class WishlistCubit extends Cubit<WishlistState> {
   /// remove wishlist
   Future<void> removeFromWishlist(int productId) async {
     try {
+      if (state is WishlistLoaded) {
+        final currentItems = List<WishlistItemModel>.from(
+          (state as WishlistLoaded).items,
+        );
+
+        currentItems.removeWhere((item) => item.id == productId);
+
+        emit(WishlistLoaded(currentItems));
+      }
+
       await api.post(
         ApiConstants.removeFromWishlist,
         data: {"product_id": productId},
       );
-
-      await fetchWishlist();
     } catch (e) {
       emit(WishlistError(e.toString()));
     }

@@ -20,7 +20,7 @@ void main() async {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(create: (context) => AuthCubit()),
-          BlocProvider(create: (context) => WishlistCubit()),
+          BlocProvider(create: (_) => WishlistCubit()..fetchWishlist()),
         ],
         child: const MyApp(),
       ),

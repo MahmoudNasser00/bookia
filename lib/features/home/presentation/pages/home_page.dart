@@ -27,8 +27,6 @@ class _HomePageState extends State<HomePage>
   @override
   void initState() {
     super.initState();
-
-    homeCubit = HomeCubit(HomeDataSource(ApiClient()))..loadHome();
     _tabController = TabController(length: 4, vsync: this);
     _tabController.addListener(() {
       if (_tabController.indexIsChanging) {
@@ -40,8 +38,6 @@ class _HomePageState extends State<HomePage>
     // context.read<HomeCubit>().loadHome();
   }
 
-  late final HomeCubit homeCubit;
-
   @override
   void dispose() {
     _tabController.dispose();
@@ -50,8 +46,8 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider.value(
-      value: homeCubit,
+    return BlocProvider(
+      create: (context) => HomeCubit(HomeDataSource(ApiClient()))..loadHome(),
       child: Scaffold(
         body: TabBarView(
           controller: _tabController,
