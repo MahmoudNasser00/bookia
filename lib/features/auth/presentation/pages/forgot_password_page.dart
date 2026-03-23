@@ -23,63 +23,69 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        onBackPressed: () {
-          Navigator.pop(context);
-        },
-      ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.only(left: 22.w, right: 22.w, top: 29.h),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisAlignment: .center,
-            crossAxisAlignment: .start,
-            mainAxisSize: .min,
-            children: [
-              Text(
-                LocaleKeys.forgot_password.tr(),
-                style: AppTextStyles.playfairDisplayLarge(
-                  context,
-                  fontSize: 30.sp,
-                  color: AppColors.black,
-                  fontWeight: FontWeight.w400,
-                  fontStyle: FontStyle.italic,
-                ),
-              ),
-              SizedBox(height: 10.h),
-              Text(
-                LocaleKeys
-                    .Dont_worry_It_occurs_Please_enter_the_email_address_linked_with_your_account.tr(),
-                style: AppTextStyles.playfairDisplayLarge(
-                  context,
-                  fontSize: 16.sp,
-                  color: AppColors.black,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              SizedBox(height: 30.h),
-              CustomTextfield(
-                hintText: LocaleKeys.email.tr(),
-                validator: AppFormValidations.emailValidator,
-                inputFormatters: AppFormValidations.emailFormatter,
-                controller: emailController,
-                keyboardType: TextInputType.emailAddress,
-              ),
-              SizedBox(height: 38.h),
-              CustomButton(
-                onPressed: () {
-                  forgotPassword(context: context, formKey: _formKey);
-                },
-                text: LocaleKeys.send_code.tr(),
-                color: AppColors.primary_button_color,
-                textColor: AppColors.white,
-                width: 331.w,
-                height: 56.h,
-              ),
-            ],
+      body: CustomScrollView(
+        slivers: [
+          CustomAppBar(
+            onBackPressed: () {
+              Navigator.pop(context);
+            },
           ),
-        ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.only(left: 22.w, right: 22.w, top: 29.h),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: .center,
+                  crossAxisAlignment: .start,
+                  mainAxisSize: .min,
+                  children: [
+                    Text(
+                      LocaleKeys.forgot_password.tr(),
+                      style: AppTextStyles.playfairDisplayLarge(
+                        context,
+                        fontSize: 30.sp,
+                        color: AppColors.black,
+                        fontWeight: FontWeight.w400,
+                        fontStyle: FontStyle.italic,
+                      ),
+                    ),
+                    SizedBox(height: 10.h),
+                    Text(
+                      LocaleKeys
+                          .Dont_worry_It_occurs_Please_enter_the_email_address_linked_with_your_account.tr(),
+                      style: AppTextStyles.playfairDisplayLarge(
+                        context,
+                        fontSize: 16.sp,
+                        color: AppColors.black,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    SizedBox(height: 30.h),
+                    CustomTextfield(
+                      hintText: LocaleKeys.email.tr(),
+                      validator: AppFormValidations.emailValidator,
+                      inputFormatters: AppFormValidations.emailFormatter,
+                      controller: emailController,
+                      keyboardType: TextInputType.emailAddress,
+                    ),
+                    SizedBox(height: 38.h),
+                    CustomButton(
+                      onPressed: () {
+                        forgotPassword(context: context, formKey: _formKey);
+                      },
+                      text: LocaleKeys.send_code.tr(),
+                      color: AppColors.primary_button_color,
+                      textColor: AppColors.white,
+                      width: 331.w,
+                      height: 56.h,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

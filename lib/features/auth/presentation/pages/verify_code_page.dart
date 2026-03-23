@@ -56,70 +56,76 @@ class _VerifyCodePageState extends State<VerifyCodePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        onBackPressed: () {
-          Navigator.pop(context);
-        },
-      ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.only(left: 22.w, right: 22.w, top: 29.h),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: .start,
-            mainAxisSize: .min,
-            mainAxisAlignment: .center,
-            children: [
-              Text(
-                LocaleKeys.otp_verification.tr(),
-                style: AppTextStyles.playfairDisplayLarge(
-                  context,
-                  fontSize: 30.sp,
-                  color: AppColors.black,
-                  fontWeight: FontWeight.w400,
-                  fontStyle: FontStyle.italic,
-                ),
-              ),
-              SizedBox(height: 10.h),
-              Text(
-                LocaleKeys
-                    .Enter_the_verification_code_we_just_sent_on_your_email_address.tr(),
-                style: AppTextStyles.playfairDisplayLarge(
-                  context,
-                  fontSize: 16.sp,
-                  color: AppColors.black,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              SizedBox(height: 35.h),
-              Pinput(
-                length: 6,
-                controller: pinController,
-                focusNode: focusNode,
-                keyboardType: TextInputType.number,
-                inputFormatters: AppFormValidations.otpFormatter,
-                validator: AppFormValidations.otpValidator,
-                onChanged: (value) {
-                  setState(() {
-                    isButtonEnabled = value.length == 6;
-                  });
-                },
-                onCompleted: (value) {
-                  verifyOtp();
-                },
-              ),
-              SizedBox(height: 30.h),
-              CustomButton(
-                color: AppColors.primary_button_color,
-                textColor: AppColors.white,
-                text: LocaleKeys.verify.tr(),
-                onPressed: isButtonEnabled ? verifyOtp : null,
-                width: 331.w,
-                height: 56.h,
-              ),
-            ],
+      body: CustomScrollView(
+        slivers: [
+          CustomAppBar(
+            onBackPressed: () {
+              Navigator.pop(context);
+            },
           ),
-        ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.only(left: 22.w, right: 22.w, top: 29.h),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: .start,
+                  mainAxisSize: .min,
+                  mainAxisAlignment: .center,
+                  children: [
+                    Text(
+                      LocaleKeys.otp_verification.tr(),
+                      style: AppTextStyles.playfairDisplayLarge(
+                        context,
+                        fontSize: 30.sp,
+                        color: AppColors.black,
+                        fontWeight: FontWeight.w400,
+                        fontStyle: FontStyle.italic,
+                      ),
+                    ),
+                    SizedBox(height: 10.h),
+                    Text(
+                      LocaleKeys
+                          .Enter_the_verification_code_we_just_sent_on_your_email_address.tr(),
+                      style: AppTextStyles.playfairDisplayLarge(
+                        context,
+                        fontSize: 16.sp,
+                        color: AppColors.black,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    SizedBox(height: 35.h),
+                    Pinput(
+                      length: 6,
+                      controller: pinController,
+                      focusNode: focusNode,
+                      keyboardType: TextInputType.number,
+                      inputFormatters: AppFormValidations.otpFormatter,
+                      validator: AppFormValidations.otpValidator,
+                      onChanged: (value) {
+                        setState(() {
+                          isButtonEnabled = value.length == 6;
+                        });
+                      },
+                      onCompleted: (value) {
+                        verifyOtp();
+                      },
+                    ),
+                    SizedBox(height: 30.h),
+                    CustomButton(
+                      color: AppColors.primary_button_color,
+                      textColor: AppColors.white,
+                      text: LocaleKeys.verify.tr(),
+                      onPressed: isButtonEnabled ? verifyOtp : null,
+                      width: 331.w,
+                      height: 56.h,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
       bottomNavigationBar: Padding(
         padding: EdgeInsets.only(bottom: 22.h),

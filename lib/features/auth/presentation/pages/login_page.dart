@@ -26,137 +26,162 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController emailController = TextEditingController();
 
   TextEditingController passwordController = TextEditingController();
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        onBackPressed: () {
-          Navigator.pop(context);
-        },
-      ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.only(left: 22.w, right: 22.w, top: 29.h),
-
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: <Widget>[
-              Text(
-                LocaleKeys.welcome_back.tr(),
-                style: AppTextStyles.playfairDisplayLarge(
-                  context,
-                  fontStyle: FontStyle.normal,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 30.sp,
-                  color: AppColors.black,
-                ),
-              ),
-              SizedBox(height: 32.h),
-              // email
-              CustomTextfield(
-                hintText: LocaleKeys.email.tr(),
-                controller: emailController,
-                keyboardType: TextInputType.emailAddress,
-                validator: AppFormValidations.emailValidator,
-                inputFormatters: AppFormValidations.emailFormatter,
-              ),
-              SizedBox(height: 15.h),
-              // password
-              CustomTextfield(
-                hintText: LocaleKeys.password.tr(),
-                controller: passwordController,
-                isPassword: true,
-                keyboardType: TextInputType.visiblePassword,
-                inputFormatters: AppFormValidations.passwordFormatter,
-                validator: AppFormValidations.passwordValidator,
-              ),
-              SizedBox(height: 13.h),
-              Row(
-                crossAxisAlignment: .center,
-                mainAxisAlignment: .end,
-                mainAxisSize: .max,
-                children: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, AppRoutes.forgotPassword);
-                    },
-                    child: Text(
-                      LocaleKeys.forgot_password.tr(),
-                      style: AppTextStyles.playfairDisplayLarge(
-                        context,
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 14.sp,
-                        color: AppColors.black,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 30.h),
-              // login button
-              CustomButton(
-                text: LocaleKeys.login.tr(),
-                onPressed: () {
-                  logIn(context: context, formKey: _formKey);
-                },
-                color: AppColors.primary_button_color,
-                textColor: AppColors.white,
-                width: 331.w,
-                height: 56.h,
-              ),
-              SizedBox(height: 44.h),
-              Row(
-                children: [
-                  const Expanded(
-                    child: Divider(thickness: 1, color: AppColors.hintColor),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 12.w),
-                    child: Text(
-                      LocaleKeys.or.tr(),
-                      style: AppTextStyles.playfairDisplayLarge(
-                        context,
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 14.sp,
-                        color: AppColors.black,
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Divider(thickness: 1, color: AppColors.hintColor),
-                  ),
-                ],
-              ),
-              SizedBox(height: 30.h),
-              CustomButton(
-                text: LocaleKeys.sign_in_with_google.tr(),
-                leading: SvgPicture.asset(Assets.iconsGoogle),
-                onPressed: () {},
-                color: AppColors.white,
-                textColor: AppColors.black,
-                width: 329.w,
-                height: 56.h,
-              ),
-              SizedBox(height: 15.h),
-              CustomButton(
-                leading: SvgPicture.asset(
-                  Assets.iconsApple,
-                  width: 26.w,
-                  height: 26.w,
-                ),
-                text: LocaleKeys.sign_in_with_apple.tr(),
-                onPressed: () {},
-                color: AppColors.white,
-                textColor: AppColors.black,
-                width: 329.w,
-                height: 56.h,
-              ),
-            ],
+      body: CustomScrollView(
+        slivers: [
+          CustomAppBar(
+            onBackPressed: () {
+              Navigator.pop(context);
+            },
           ),
-        ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.only(left: 22.w, right: 22.w, top: 29.h),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: <Widget>[
+                    Text(
+                      LocaleKeys.welcome_back.tr(),
+                      style: AppTextStyles.playfairDisplayLarge(
+                        context,
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 30.sp,
+                        color: AppColors.black,
+                      ),
+                    ),
+                    SizedBox(height: 32.h),
+                    // email
+                    CustomTextfield(
+                      hintText: LocaleKeys.email.tr(),
+                      controller: emailController,
+                      keyboardType: TextInputType.emailAddress,
+                      validator: AppFormValidations.emailValidator,
+                      inputFormatters: AppFormValidations.emailFormatter,
+                    ),
+                    SizedBox(height: 15.h),
+                    // password
+                    CustomTextfield(
+                      hintText: LocaleKeys.password.tr(),
+                      controller: passwordController,
+                      isPassword: true,
+                      keyboardType: TextInputType.visiblePassword,
+                      inputFormatters: AppFormValidations.passwordFormatter,
+                      validator: AppFormValidations.passwordValidator,
+                    ),
+                    SizedBox(height: 13.h),
+                    Row(
+                      crossAxisAlignment: .center,
+                      mainAxisAlignment: .end,
+                      mainAxisSize: .max,
+                      children: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pushNamed(
+                              context,
+                              AppRoutes.forgotPassword,
+                            );
+                          },
+                          child: Text(
+                            LocaleKeys.forgot_password.tr(),
+                            style: AppTextStyles.playfairDisplayLarge(
+                              context,
+                              fontStyle: FontStyle.normal,
+                              fontWeight: FontWeight.w400,
+                              fontSize: 14.sp,
+                              color: AppColors.black,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 30.h),
+                    // login button
+                    CustomButton(
+                      text: LocaleKeys.login.tr(),
+                      onPressed: () {
+                        logIn(
+                          context: context,
+                          formKey: _formKey,
+                          email: emailController.text,
+                          password: passwordController.text,
+                        );
+                      },
+                      color: AppColors.primary_button_color,
+                      textColor: AppColors.white,
+                      width: 331.w,
+                      height: 56.h,
+                    ),
+                    SizedBox(height: 44.h),
+                    Row(
+                      children: [
+                        const Expanded(
+                          child: Divider(
+                            thickness: 1,
+                            color: AppColors.hintColor,
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 12.w),
+                          child: Text(
+                            LocaleKeys.or.tr(),
+                            style: AppTextStyles.playfairDisplayLarge(
+                              context,
+                              fontStyle: FontStyle.normal,
+                              fontWeight: FontWeight.w400,
+                              fontSize: 14.sp,
+                              color: AppColors.black,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Divider(
+                            thickness: 1,
+                            color: AppColors.hintColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 30.h),
+                    CustomButton(
+                      text: LocaleKeys.sign_in_with_google.tr(),
+                      leading: SvgPicture.asset(Assets.iconsGoogle),
+                      onPressed: () {},
+                      color: AppColors.white,
+                      textColor: AppColors.black,
+                      width: 329.w,
+                      height: 56.h,
+                    ),
+                    SizedBox(height: 15.h),
+                    CustomButton(
+                      leading: SvgPicture.asset(
+                        Assets.iconsApple,
+                        width: 26.w,
+                        height: 26.w,
+                      ),
+                      text: LocaleKeys.sign_in_with_apple.tr(),
+                      onPressed: () {},
+                      color: AppColors.white,
+                      textColor: AppColors.black,
+                      width: 329.w,
+                      height: 56.h,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
       bottomNavigationBar: Padding(
         padding: EdgeInsets.only(bottom: 22.h),

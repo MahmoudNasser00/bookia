@@ -15,7 +15,7 @@ class CustomTextfield extends StatefulWidget {
   final bool enabled;
   final int maxLines;
   final dynamic inputFormatters;
-
+  final void Function(String)? onSubmitted;
   const CustomTextfield({
     super.key,
     required this.hintText,
@@ -28,6 +28,7 @@ class CustomTextfield extends StatefulWidget {
     this.enabled = true,
     this.maxLines = 1,
     this.inputFormatters,
+    this.onSubmitted,
   });
 
   @override
@@ -87,6 +88,7 @@ class _CustomTextfieldState extends State<CustomTextfield> {
         ),
         errorStyle: TextStyle(fontSize: 12.sp, color: AppColors.error),
       ),
+      onFieldSubmitted: widget.onSubmitted,
     );
   }
 }

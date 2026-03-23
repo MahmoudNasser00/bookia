@@ -1,7 +1,15 @@
+import 'package:bookia/core/network/api_client.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../features/auth/logic/verify_source.dart';
 import '../../features/auth/presentation/pages/password_change_page.dart';
 import '../../features/auth/presentation/pages/welcome.dart';
+import '../../features/home/data/home_data_source.dart';
+import '../../features/home/data/models/product_model.dart';
+import '../../features/home/logic/home_cubit.dart';
+import '../../features/search/data/cubit/search_cubit.dart';
+import '../../features/search/data/search_data_source.dart';
+import '../../features/search/presentation/pages/search_page.dart';
 import 'app_routes_name.dart';
 
 // Auth
@@ -13,7 +21,6 @@ import '../../features/auth/presentation/pages/reset_password_page.dart';
 
 // Home
 import '../../features/home/presentation/pages/home_page.dart';
-import '../../features/home/presentation/pages/search_page.dart';
 
 // Profile
 import '../../features/profile/presentation/pages/profile_page.dart';
@@ -59,15 +66,28 @@ class RouteGenerator {
 
       /// Home
       case AppRoutes.home:
-        return _route(settings, const HomePage());
-
+        return _route(
+          settings,
+          BlocProvider(
+            create: (context) =>
+                HomeCubit(HomeDataSource(ApiClient()))..loadHome(),
+            child: const HomePage(),
+          ),
+        );
       case AppRoutes.search:
-        return _route(settings, const SearchPage());
+        return _route(
+          settings,
+          BlocProvider(
+            create: (context) => SearchCubit(SearchDataSource(ApiClient())),
+            child: const SearchPage(),
+          ),
+        );
 
       /// Product Details (with arguments)
       case AppRoutes.productDetails:
-        final productId = settings.arguments as String;
-        return _route(settings, ProductDetailsPage(productId: productId));
+        final product = settings.arguments as ProductModel;
+
+        return _route(settings, ProductDetailsPage(product: product));
 
       /// Cart
       case AppRoutes.cart:

@@ -8,6 +8,7 @@ import 'package:flutter_svg/svg.dart';
 import '../../../../core/app_themes/app_text_styles.dart';
 import '../../../../core/app_themes/colors/app_colors.dart';
 import '../../../../core/generated/assets.dart';
+import '../../../../core/storage/token_storage.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -58,10 +59,16 @@ class _SplashPageState extends State<SplashPage>
     _navigate();
   }
 
-  void _navigate() {
+  void _navigate() async {
+    final token = await TokenStorage.getToken();
     Future.delayed(const Duration(seconds: 5), () {
       if (!mounted) return;
-      Navigator.pushReplacementNamed(context, AppRoutes.WelcomeScreen);
+
+      if (token != null) {
+        Navigator.pushReplacementNamed(context, AppRoutes.home);
+      } else {
+        Navigator.pushReplacementNamed(context, AppRoutes.WelcomeScreen);
+      }
     });
   }
 

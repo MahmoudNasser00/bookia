@@ -30,84 +30,101 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        onBackPressed: () {
-          Navigator.pop(context);
-        },
-      ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.only(left: 22.w, right: 22.w, top: 29.h),
-        child: Column(
-          children: [
-            Text(
-              LocaleKeys.register_title.tr(),
-              style: AppTextStyles.playfairDisplayLarge(
-                context,
-                fontSize: 30.sp,
-                color: AppColors.black,
-                fontWeight: FontWeight.w400,
-                fontStyle: FontStyle.italic,
-              ),
-            ),
-            SizedBox(height: 32.h),
-            Form(
-              key: _formKey,
+      body: CustomScrollView(
+        slivers: [
+          CustomAppBar(
+            onBackPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.only(left: 22.w, right: 22.w, top: 29.h),
               child: Column(
-                crossAxisAlignment: .center,
-                mainAxisSize: .min,
-                spacing: 11.h,
                 children: [
-                  CustomTextfield(
-                    hintText: LocaleKeys.username.tr(),
-                    controller: userNameController,
-                    keyboardType: TextInputType.name,
-                    inputFormatters: AppFormValidations.userNameFormatter,
-                    validator: AppFormValidations.userNameValidator,
+                  Text(
+                    LocaleKeys.register_title.tr(),
+                    style: AppTextStyles.playfairDisplayLarge(
+                      context,
+                      fontSize: 30.sp,
+                      color: AppColors.black,
+                      fontWeight: FontWeight.w400,
+                      fontStyle: FontStyle.italic,
+                    ),
                   ),
-                  CustomTextfield(
-                    hintText: LocaleKeys.email.tr(),
-                    controller: emailController,
-                    keyboardType: TextInputType.emailAddress,
-                    inputFormatters: AppFormValidations.emailFormatter,
-                    validator: AppFormValidations.emailValidator,
-                  ),
-                  CustomTextfield(
-                    hintText: LocaleKeys.password.tr(),
-                    controller: passwordController,
-                    keyboardType: TextInputType.visiblePassword,
-                    inputFormatters: AppFormValidations.passwordFormatter,
-                    validator: AppFormValidations.passwordValidator,
-                    isPassword: true,
-                  ),
-                  CustomTextfield(
-                    hintText: LocaleKeys.confirm_password.tr(),
-                    controller: confirmPasswordController,
-                    keyboardType: TextInputType.visiblePassword,
-                    inputFormatters: AppFormValidations.passwordFormatter,
-                    isPassword: true,
-                    validator: (value) =>
-                        AppFormValidations.confirmPasswordValidator(
-                          value,
-                          passwordController.text,
+                  SizedBox(height: 32.h),
+                  Form(
+                    key: _formKey,
+                    child: Column(
+                      crossAxisAlignment: .center,
+                      mainAxisSize: .min,
+                      spacing: 11.h,
+                      children: [
+                        // user name
+                        CustomTextfield(
+                          hintText: LocaleKeys.username.tr(),
+                          controller: userNameController,
+                          keyboardType: TextInputType.name,
+                          inputFormatters: AppFormValidations.userNameFormatter,
+                          validator: AppFormValidations.userNameValidator,
                         ),
+                        // email
+                        CustomTextfield(
+                          hintText: LocaleKeys.email.tr(),
+                          controller: emailController,
+                          keyboardType: TextInputType.emailAddress,
+                          inputFormatters: AppFormValidations.emailFormatter,
+                          validator: AppFormValidations.emailValidator,
+                        ),
+                        // pass
+                        CustomTextfield(
+                          hintText: LocaleKeys.password.tr(),
+                          controller: passwordController,
+                          keyboardType: TextInputType.visiblePassword,
+                          inputFormatters: AppFormValidations.passwordFormatter,
+                          validator: AppFormValidations.passwordValidator,
+                          isPassword: true,
+                        ),
+                        // confirm pass
+                        CustomTextfield(
+                          hintText: LocaleKeys.confirm_password.tr(),
+                          controller: confirmPasswordController,
+                          keyboardType: TextInputType.visiblePassword,
+                          inputFormatters: AppFormValidations.passwordFormatter,
+                          isPassword: true,
+                          validator: (value) =>
+                              AppFormValidations.confirmPasswordValidator(
+                                value,
+                                passwordController.text,
+                              ),
+                        ),
+                      ],
+                    ),
                   ),
+                  SizedBox(height: 30.h),
+                  CustomButton(
+                    text: LocaleKeys.register.tr(),
+                    onPressed: () {
+                      registar(
+                        name: userNameController.text,
+                        email: emailController.text,
+                        password: passwordController.text,
+                        passwordConfirmation: confirmPasswordController.text,
+                        context: context,
+                        formKey: _formKey,
+                      );
+                    },
+                    color: AppColors.primary_button_color,
+                    textColor: AppColors.white,
+                    width: 331.w,
+                    height: 56.h,
+                  ),
+                  SizedBox(height: 134.h),
                 ],
               ),
             ),
-            SizedBox(height: 30.h),
-            CustomButton(
-              text: LocaleKeys.register.tr(),
-              onPressed: () {
-                registar(context: context, formKey: _formKey);
-              },
-              color: AppColors.primary_button_color,
-              textColor: AppColors.white,
-              width: 331.w,
-              height: 56.h,
-            ),
-            SizedBox(height: 134.h),
-          ],
-        ),
+          ),
+        ],
       ),
       bottomNavigationBar: Padding(
         padding: EdgeInsets.only(bottom: 22.h),

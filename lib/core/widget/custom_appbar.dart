@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../app_themes/app_text_styles.dart';
 import '../app_themes/colors/app_colors.dart';
 import '../generated/assets.dart';
 
@@ -27,7 +28,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
+    return SliverAppBar(
+      floating: true,
+      snap: true,
       backgroundColor: backgroundColor,
       leadingWidth: 80.w,
       centerTitle: centerTitle,
@@ -60,7 +63,16 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             )
           : null,
       title: title != null
-          ? Text(title!, style: Theme.of(context).textTheme.titleLarge)
+          ? Text(
+              title!,
+              style: AppTextStyles.playfairDisplayLarge(
+                context,
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w600,
+                fontSize: 24.sp,
+                color: AppColors.black,
+              ),
+            )
           : null,
       actions: actions,
     );
