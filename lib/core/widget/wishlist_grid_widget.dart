@@ -70,6 +70,8 @@ class WishlistGridWidget extends StatelessWidget {
               final product = displayItems[index];
 
               return Skeletonizer(
+                ignoreContainers: true,
+                switchAnimationConfig: SwitchAnimationConfig(),
                 enabled: isLoading,
                 child: Container(
                   key: ValueKey(product?.id ?? index),

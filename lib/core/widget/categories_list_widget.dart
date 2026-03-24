@@ -20,6 +20,8 @@ class CategoriesListWidget extends StatelessWidget {
 
     return Skeletonizer(
       enabled: isLoading,
+      ignoreContainers: true,
+      switchAnimationConfig: SwitchAnimationConfig(),
       child: SizedBox(
         height: 80.h,
         child: ListView.builder(

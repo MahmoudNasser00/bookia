@@ -79,5 +79,6 @@ abstract class  LocaleKeys {
   static const Your_new_password_must_be_unique_from_those_previously_used = 'Your_new_password_must_be_unique_from_those_previously_used';
   static const Your_password_has_been_changed_successfully = 'Your_password_has_been_changed_successfully';
   static const No_items_in_favorites = 'No_items_in_favorites';
+  static const FAQ = 'FAQ';
 
 }

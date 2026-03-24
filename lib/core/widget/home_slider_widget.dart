@@ -28,6 +28,8 @@ class _HomeSliderWidgetState extends State<HomeSliderWidget> {
 
     return Skeletonizer(
       enabled: widget.isLoading,
+      ignoreContainers: true,
+      switchAnimationConfig: SwitchAnimationConfig(),
       child: Column(
         children: [
           CarouselSlider(

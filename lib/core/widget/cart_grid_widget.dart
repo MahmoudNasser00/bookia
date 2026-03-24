@@ -42,6 +42,8 @@ class CartGridWidget extends StatelessWidget {
 
               return Skeletonizer(
                 enabled: isLoading,
+                ignoreContainers: true,
+                switchAnimationConfig: SwitchAnimationConfig(),
                 child: Container(
                   margin: EdgeInsets.only(bottom: 16.h),
                   padding: EdgeInsets.all(12.w),

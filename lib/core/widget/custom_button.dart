@@ -10,6 +10,7 @@ class CustomButton extends StatelessWidget {
   final dynamic width;
   final dynamic height;
   final Widget? leading;
+  final Widget? postFiex;
 
   const CustomButton({
     Key? key,
@@ -20,6 +21,7 @@ class CustomButton extends StatelessWidget {
     required this.width,
     required this.height,
     this.leading,
+    this.postFiex,
   }) : super(key: key);
 
   @override
@@ -47,6 +49,7 @@ class CustomButton extends StatelessWidget {
               fontStyle: FontStyle.italic,
             ),
           ),
+          if (postFiex != null) ...[SizedBox(width: 8.w), postFiex!],
         ],
       ),
     );

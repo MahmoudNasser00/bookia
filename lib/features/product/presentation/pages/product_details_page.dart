@@ -10,6 +10,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../core/app_themes/app_text_styles.dart';
 import '../../../../core/localization/generated/locale_keys.g.dart';
+import '../../../cart/cubit/cart_cubit.dart';
 import '../../../home/data/models/product_model.dart';
 import '../../../wishlist/cubit/wishlist_cubit.dart';
 import '../../../wishlist/cubit/wishlist_state.dart';
@@ -139,7 +140,13 @@ class ProductDetailsPage extends StatelessWidget {
                         textColor: AppColors.white,
                         width: 212.w,
                         height: 56.h,
-                        onPressed: () {},
+                        onPressed: () {
+                          context.read<CartCubit>().addToCart(product.id);
+
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text("Added to cart")),
+                          );
+                        },
                       ),
                     ],
                   ),

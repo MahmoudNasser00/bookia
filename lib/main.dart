@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'features/auth/cubit/auth_cubit.dart';
 import 'features/cart/cubit/cart_cubit.dart';
+import 'features/profile/cubit/profile_cubit.dart';
 import 'features/wishlist/cubit/wishlist_cubit.dart';
 
 void main() async {
@@ -23,6 +24,7 @@ void main() async {
           BlocProvider(create: (context) => AuthCubit()),
           BlocProvider(create: (_) => WishlistCubit()..fetchWishlist()),
           BlocProvider(create: (_) => CartCubit()),
+          BlocProvider(create: (_) => ProfileCubit()..fetchProfile()),
         ],
         child: const MyApp(),
       ),
