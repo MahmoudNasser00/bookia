@@ -73,5 +73,6 @@
   "Enter_the_verification_code_we_just_sent_on_your_email_address": "أدخل رمز التحقق الذي أرسلناه للتو إلى بريدك الإلكتروني",
   "Dont_worry_It_occurs_Please_enter_the_email_address_linked_with_your_account": "لا تقلق! هذا يحدث يرجى إدخال عنوان البريد الإلكتروني المرتبط بحسابك",
   "Your_new_password_must_be_unique_from_those_previously_used": "يجب أن تكون كلمة المرور الجديدة الخاصة بك فريدة من نوعها وتختلف عن كلمات المرور التي استخدمتها سابقاً",
-  "Your_password_has_been_changed_successfully": "تم تغيير كلمة مرورك بنجاح"
+  "Your_password_has_been_changed_successfully": "تم تغيير كلمة مرورك بنجاح",
+  "No_items_in_favorites": "لا يوجد عناصر في المفضلة"
 }

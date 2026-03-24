@@ -78,5 +78,6 @@ abstract class  LocaleKeys {
   static const Dont_worry_It_occurs_Please_enter_the_email_address_linked_with_your_account = 'Dont_worry_It_occurs_Please_enter_the_email_address_linked_with_your_account';
   static const Your_new_password_must_be_unique_from_those_previously_used = 'Your_new_password_must_be_unique_from_those_previously_used';
   static const Your_password_has_been_changed_successfully = 'Your_password_has_been_changed_successfully';
+  static const No_items_in_favorites = 'No_items_in_favorites';
 
 }

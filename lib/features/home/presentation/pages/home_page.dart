@@ -1,14 +1,14 @@
 import 'package:bookia/core/generated/assets.dart';
 import 'package:bookia/core/widget/custom_bottom_nav_item.dart';
-import 'package:bookia/features/home/presentation/pages/items/cart_tab.dart';
 import 'package:bookia/features/home/presentation/pages/items/home_tab.dart';
-import 'package:bookia/features/home/presentation/pages/items/profile_tab.dart';
 import 'package:bookia/features/wishlist/presentation/pages/wishlist_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/app_themes/colors/app_colors.dart';
 import '../../../../core/network/api_client.dart';
+import '../../../cart/presentation/pages/cart_page.dart';
+import '../../../profile/presentation/pages/profile_page.dart';
 import '../../data/home_data_source.dart';
 import '../../logic/home_cubit.dart';
 
@@ -29,13 +29,10 @@ class _HomePageState extends State<HomePage>
     super.initState();
     _tabController = TabController(length: 4, vsync: this);
     _tabController.addListener(() {
-      if (_tabController.indexIsChanging) {
-        setState(() {
-          currentIndex = _tabController.index;
-        });
-      }
+      setState(() {
+        currentIndex = _tabController.index;
+      });
     });
-    // context.read<HomeCubit>().loadHome();
   }
 
   @override

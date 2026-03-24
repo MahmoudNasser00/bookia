@@ -12,6 +12,7 @@ class Assets {
   static const String iconsSuccessfully = 'assets/icons/successfully.svg';
   static const String iconsWishlist = 'assets/icons/wishlist.svg';
   static const String iconsCart = 'assets/icons/cart.svg';
+  static const String iconsExit = 'assets/icons/exit.svg';
 
   static const String imagesBackground = 'assets/images/background.png';
 

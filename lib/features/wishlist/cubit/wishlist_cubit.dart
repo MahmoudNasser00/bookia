@@ -7,9 +7,7 @@ import 'wishlist_state.dart';
 class WishlistCubit extends Cubit<WishlistState> {
   final ApiClient api = ApiClient();
 
-  WishlistCubit() : super(WishlistInitial()) {
-    fetchWishlist();
-  }
+  WishlistCubit() : super(WishlistInitial());
 
   /// get wishlist
   Future<void> fetchWishlist() async {

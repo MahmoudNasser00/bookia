@@ -1,9 +1,11 @@
 import 'package:bookia/core/localization/generated/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
+import '../../features/cart/cubit/cart_cubit.dart';
 import '../../features/home/data/models/product_model.dart';
 import '../app_routes/app_routes_name.dart';
 import '../app_themes/app_text_styles.dart';
@@ -108,7 +110,13 @@ class BestSellerGridWidget extends StatelessWidget {
                       fixedSize: Size(72.w, 27.h),
                     ),
 
-                    onPressed: () {},
+                    onPressed: () {
+                      context.read<CartCubit>().addToCart(book!.id);
+
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text("Added to cart")),
+                      );
+                    },
                     child: Text(
                       LocaleKeys.buy.tr(),
                       style: AppTextStyles.playfairDisplayLarge(

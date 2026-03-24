@@ -91,7 +91,7 @@ class RouteGenerator {
 
       /// Cart
       case AppRoutes.cart:
-        return _route(settings, const CartPage());
+        return _route(settings, const CartTab());
 
       /// Checkout
       case AppRoutes.checkout:
@@ -99,7 +99,7 @@ class RouteGenerator {
 
       /// Profile
       case AppRoutes.profile:
-        return _route(settings, const ProfilePage());
+        return _route(settings, const ProfileTab());
 
       case AppRoutes.editProfile:
         return _route(settings, const EditProfilePage());
