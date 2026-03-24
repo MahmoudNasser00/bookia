@@ -9,7 +9,14 @@ class ProfileCubit extends Cubit<ProfileModel?> {
   ProfileCubit() : super(null);
 
   Future<void> fetchProfile() async {
-    final response = await api.get(ApiConstants.profile);
-    emit(ProfileModel.fromJson(response.data["data"]));
+    try {
+      final response = await api.get(ApiConstants.profile);
+
+      final data = response.data["data"];
+
+      emit(ProfileModel.fromJson(data));
+    } catch (e) {
+      print("PROFILE ERROR: $e");
+    }
   }
 }

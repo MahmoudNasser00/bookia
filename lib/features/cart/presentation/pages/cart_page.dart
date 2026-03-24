@@ -86,6 +86,7 @@ class _CartTabState extends State<CartTab> {
                       textColor: AppColors.white,
                       width: double.infinity,
                       height: 55.h,
+                      onPressed: () {},
                     ),
                   ],
                 ),

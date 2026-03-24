@@ -37,19 +37,25 @@ class CustomButton extends StatelessWidget {
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: .center,
         children: [
           if (leading != null) ...[leading!, SizedBox(width: 8.w)],
-          Text(
-            text,
-            style: AppTextStyles.playfairDisplayLarge(
-              context,
-              color: textColor,
-              fontSize: 20.sp,
-              fontWeight: FontWeight.w400,
-              fontStyle: FontStyle.italic,
+          Center(
+            child: Text(
+              text,
+              style: AppTextStyles.playfairDisplayLarge(
+                context,
+                color: textColor,
+                fontSize: 20.sp,
+                fontWeight: FontWeight.w400,
+                fontStyle: FontStyle.italic,
+              ),
             ),
           ),
-          if (postFiex != null) ...[SizedBox(width: 8.w), postFiex!],
+          if (postFiex != null) ...[
+            Expanded(child: SizedBox(width: 8.w)),
+            postFiex!,
+          ],
         ],
       ),
     );

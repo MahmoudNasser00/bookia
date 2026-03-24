@@ -26,6 +26,8 @@ class ApiConstants {
   // Profile
   static const String profile = "/profile";
   static const String updateProfile = "/update-profile";
+  static const String updatePassword = "/update-password";
+  static const String deleteProfile = "/delete-profile";
 
   // Wishlist
   static const wishlist = "/wishlist";
