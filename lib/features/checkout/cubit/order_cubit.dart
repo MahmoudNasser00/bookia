@@ -2,6 +2,7 @@ import 'package:bookia/core/network/api_constants.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/network/api_client.dart';
 import '../data/order_repository.dart';
+import '../models/checkout_model.dart';
 import '../models/governorate_model.dart';
 import 'order_state.dart';
 
@@ -45,6 +46,22 @@ class OrderCubit extends Cubit<OrderState> {
       final orders = await repo.getOrders();
 
       emit(OrderHistoryLoaded(orders));
+    } catch (e) {
+      emit(OrderError(e.toString()));
+    }
+  }
+
+  /// checkout
+
+  CheckoutModel? checkout;
+
+  Future<void> getCheckout() async {
+    try {
+      emit(OrderLoading());
+
+      checkout = await repo.getCheckout();
+
+      emit(OrderSuccess());
     } catch (e) {
       emit(OrderError(e.toString()));
     }

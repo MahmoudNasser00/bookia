@@ -1,5 +1,6 @@
 import '../../../core/network/api_client.dart';
 import '../../../core/network/api_constants.dart';
+import '../models/checkout_model.dart';
 import '../models/order_model.dart';
 
 class OrderRepository {
@@ -42,5 +43,12 @@ class OrderRepository {
   Future<dynamic> getSingleOrder(int id) async {
     final response = await api.get("${ApiConstants.orderHistory}/$id");
     return response.data["data"];
+  }
+
+  // get checkout
+  Future<CheckoutModel> getCheckout() async {
+    final response = await api.get(ApiConstants.checkout);
+
+    return CheckoutModel.fromJson(response.data["data"]);
   }
 }

@@ -15,7 +15,10 @@ import 'package:skeletonizer/skeletonizer.dart';
 import '../../../../core/app_themes/app_text_styles.dart';
 import '../../../../core/app_themes/colors/app_colors.dart';
 import '../../../../core/helpers/validations/app_form_validations.dart';
+import '../../../../core/widget/checkout_summary.dart';
 import '../../cubit/order_cubit.dart';
+import '../../cubit/order_state.dart';
+import '../../models/checkout_model.dart';
 import '../../models/governorate_model.dart';
 
 class CheckoutPage extends StatefulWidget {
@@ -41,6 +44,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
   void initState() {
     super.initState();
     loadGovernorates();
+    context.read<OrderCubit>().getCheckout();
   }
 
   Future<void> loadGovernorates() async {
@@ -194,6 +198,33 @@ class _CheckoutPageState extends State<CheckoutPage> {
                         },
                       ),
                       SizedBox(height: 25.h),
+                      BlocBuilder<OrderCubit, OrderState>(
+                        builder: (context, state) {
+                          final cubit = context.read<OrderCubit>();
+                          final isLoading = cubit.checkout == null;
+
+                          return Skeletonizer(
+                            enabled: isLoading,
+                            child: isLoading
+                                ? CheckoutSummary(
+                                    checkout: CheckoutModel(
+                                      total: 0,
+                                      items: List.generate(
+                                        3,
+                                        (_) => CheckoutItemModel(
+                                          name: "Loading...",
+                                          price: 0,
+                                          quantity: 1,
+                                          total: 0,
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                : CheckoutSummary(checkout: cubit.checkout!),
+                          );
+                        },
+                      ),
+                      SizedBox(height: 20.h),
                     ],
                   ),
                 ),
