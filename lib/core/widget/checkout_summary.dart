@@ -17,9 +17,36 @@ class CheckoutSummary extends StatelessWidget {
       children: [
         ...checkout.items.map(
           (item) => ListTile(
-            title: Text(item.name),
-            subtitle: Text("Qty: ${item.quantity}"),
-            trailing: Text("\$${item.total}"),
+            title: Text(
+              item.name,
+              style: AppTextStyles.playfairDisplayLarge(
+                context,
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w400,
+                fontSize: 15.sp,
+                color: AppColors.black,
+              ),
+            ),
+            subtitle: Text(
+              "Qty: ${item.quantity}",
+              style: AppTextStyles.playfairDisplayLarge(
+                context,
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w400,
+                fontSize: 10.sp,
+                color: AppColors.black,
+              ),
+            ),
+            trailing: Text(
+              "\$${item.total}",
+              style: AppTextStyles.playfairDisplayLarge(
+                context,
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w400,
+                fontSize: 18.sp,
+                color: AppColors.black,
+              ),
+            ),
           ),
         ),
 
