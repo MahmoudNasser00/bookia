@@ -2,12 +2,16 @@ class ApiConstants {
   static const String baseUrl = "https://codingarabic.online/api";
 
   // Authentication
-  static const String register = "/register";
-  static const String login = "/login";
-  static const String logout = "/logout";
-  static const String forgetPassword = "/forget-password";
-  static const String checkVerifyCode = "/check-verify-code";
-  static const String resetPassword = "/reset-password";
+  static const String register = "/register"; //
+  static const String login = "/login"; //
+  static const String logout = "/logout"; //
+  static const String forgetPassword = "/forget-password"; //
+  static const String resetPassword = "/reset-password"; //
+  static const String verifyEmail = "/verify-email"; //
+  static const String resendVerifyCode = "/resend-verify-code"; //
+
+  static const String checkForgetPassword = "/check-forget-password"; //
+
   // Sliders
   static const String sliders = "/sliders";
 
@@ -21,7 +25,6 @@ class ApiConstants {
   // Books
   static const books = "/books";
   static const bestSeller = "/products-bestseller";
-  static const bookDetails = "/book";
 
   // Profile
   static const String profile = "/profile";
@@ -42,6 +45,10 @@ class ApiConstants {
 
   // Orders
   static const String checkout = "/checkout";
-  static const String orders = "/orders";
+  static const String placeOrder = "/place-order";
+  static const String orderHistory = "/order-history";
+  static const String showSingleOrder = "/show-single-order";
+
+  // Address
   static const String governorates = "/governorates";
 }

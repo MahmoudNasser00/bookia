@@ -2,7 +2,7 @@ import 'package:bookia/core/network/api_client.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../features/auth/logic/verify_source.dart';
-import '../../features/auth/presentation/pages/password_change_page.dart';
+import '../../features/auth/presentation/pages/password_change_page_successful.dart';
 import '../../features/auth/presentation/pages/welcome.dart';
 import '../../features/home/data/home_data_source.dart';
 import '../../features/home/data/models/product_model.dart';
@@ -56,11 +56,16 @@ class RouteGenerator {
         return _route(settings, const ForgotPasswordPage());
 
       case AppRoutes.verifyCode:
-        final source = settings.arguments as VerifySource;
-        return _route(settings, VerifyCodePage(source: source));
+        final args = settings.arguments as Map<String, dynamic>;
+
+        final source = args["source"] as VerifySource;
+        final email = args["email"] as String;
+
+        return _route(settings, VerifyCodePage(source: source, email: email));
 
       case AppRoutes.resetPassword:
-        return _route(settings, const ResetPasswordPage());
+        final verify_code = settings.arguments as String;
+        return _route(settings, ResetPasswordPage(verify_code: verify_code));
       case AppRoutes.passwordChange:
         return _route(settings, const PasswordChangePage());
 

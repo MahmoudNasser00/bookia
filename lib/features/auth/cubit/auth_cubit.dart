@@ -9,6 +9,7 @@ class AuthCubit extends Cubit<String> {
 
   AuthCubit() : super("initial");
 
+  // login
   Future<LoginModel?> login(String email, String password) async {
     emit("loading");
 
@@ -28,7 +29,13 @@ class AuthCubit extends Cubit<String> {
     }
   }
 
-  Future<RegistarModel?> registar(
+  // logout
+  Future logout() async {
+    await api.post(ApiConstants.logout);
+  }
+
+  // register
+  Future<RegistarModel?> register(
     String name,
     String email,
     String password,
@@ -38,7 +45,7 @@ class AuthCubit extends Cubit<String> {
 
     try {
       final response = await api.post(
-        ApiConstants.login,
+        ApiConstants.register,
         data: {
           "name": name,
           "email": email,
@@ -54,6 +61,86 @@ class AuthCubit extends Cubit<String> {
     } catch (e) {
       emit("error");
       return null;
+    }
+  }
+
+  // verify email
+  Future<bool> verifyEmail(String code) async {
+    emit("loading");
+
+    try {
+      await api.post(ApiConstants.verifyEmail, data: {"verify_code": code});
+
+      emit("success");
+      return true;
+    } catch (e) {
+      emit("error");
+      return false;
+    }
+  }
+
+  // resend verify code
+  Future<bool> resendVerifyCode() async {
+    try {
+      await api.get(ApiConstants.resendVerifyCode);
+      print("ok");
+      return true;
+    } catch (e) {
+      print(e);
+      return false;
+    }
+  }
+
+  // forget password
+  Future forgetPassword(String email) async {
+    emit("loading");
+
+    try {
+      await api.post(ApiConstants.forgetPassword, data: {"email": email});
+      emit("success");
+    } catch (e) {
+      print("error is ${e}");
+      emit("error");
+    }
+  }
+
+  // check forget password
+  Future checkForgetPassword(String email, String code) async {
+    emit("loading");
+
+    try {
+      await api.post(
+        ApiConstants.checkForgetPassword,
+        data: {"email": email, "verify_code": code},
+      );
+
+      emit("success");
+    } catch (e) {
+      emit("error");
+    }
+  }
+
+  // reset password
+  Future resetPassword(
+    String code,
+    String password,
+    String confirmPassword,
+  ) async {
+    emit("loading");
+
+    try {
+      await api.post(
+        ApiConstants.resetPassword,
+        data: {
+          "verify_code": code,
+          "new_password": password,
+          "new_password_confirmation": confirmPassword,
+        },
+      );
+
+      emit("success");
+    } catch (e) {
+      emit("error");
     }
   }
 }

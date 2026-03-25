@@ -6,7 +6,7 @@ import '../../../core/app_routes/app_routes_name.dart';
 import '../../../core/storage/token_storage.dart';
 import '../cubit/auth_cubit.dart';
 
-Future<void> registar({
+Future<void> register({
   required BuildContext context,
   required GlobalKey<FormState> formKey,
   required String name,
@@ -17,7 +17,7 @@ Future<void> registar({
   if (formKey.currentState!.validate()) {
     final authCubit = context.read<AuthCubit>();
 
-    final user = await authCubit.registar(
+    final user = await authCubit.register(
       name,
       email,
       password,
@@ -27,11 +27,13 @@ Future<void> registar({
     if (authCubit.state == "success" && user != null) {
       final token = user.token;
       await TokenStorage.saveToken(token);
-      Navigator.pushNamed(
-        context,
-        AppRoutes.verifyCode,
-        arguments: VerifySource.register,
-      );
+      if (await authCubit.resendVerifyCode()) {
+        Navigator.pushNamed(
+          context,
+          AppRoutes.verifyCode,
+          arguments: {"source": VerifySource.register, "email": email},
+        );
+      }
     } else if (authCubit.state == "error") {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("try again later or try another email")),

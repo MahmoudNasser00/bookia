@@ -56,7 +56,8 @@ class _CustomTextfieldState extends State<CustomTextfield> {
       inputFormatters: widget.inputFormatters,
       style: AppTextStyles.playfairDisplayLarge(
         context,
-        color: AppColors.hintColor,
+        color: AppColors.black,
+
         fontSize: 15.sp,
       ),
       decoration: InputDecoration(

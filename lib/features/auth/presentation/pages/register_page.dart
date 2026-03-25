@@ -27,7 +27,6 @@ class _RegisterPageState extends State<RegisterPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
@@ -105,7 +104,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   CustomButton(
                     text: LocaleKeys.register.tr(),
                     onPressed: () {
-                      registar(
+                      register(
                         name: userNameController.text,
                         email: emailController.text,
                         password: passwordController.text,

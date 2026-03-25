@@ -4,18 +4,21 @@ import 'package:bookia/core/localization/generated/locale_keys.g.dart';
 import 'package:bookia/core/widget/custom_appbar.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pinput/pinput.dart';
 
 import '../../../../core/app_themes/colors/app_colors.dart';
 import '../../../../core/helpers/validations/app_form_validations.dart';
 import '../../../../core/widget/custom_button.dart';
+import '../../cubit/auth_cubit.dart';
 import '../../logic/verify_source.dart';
 
 class VerifyCodePage extends StatefulWidget {
   final VerifySource source;
+  final String? email;
 
-  const VerifyCodePage({Key? key, required this.source}) : super(key: key);
+  const VerifyCodePage({super.key, required this.source, this.email});
 
   @override
   State<VerifyCodePage> createState() => _VerifyCodePageState();
@@ -35,19 +38,41 @@ class _VerifyCodePageState extends State<VerifyCodePage> {
     super.dispose();
   }
 
-  void verifyOtp() {
+  Future<void> verifyOtp() async {
     if (_formKey.currentState!.validate()) {
       switch (widget.source) {
         case VerifySource.register:
-          Navigator.pushNamedAndRemoveUntil(
-            context,
-            AppRoutes.home,
-            (route) => false,
-          );
+          final authCubit = context.read<AuthCubit>();
+          final verify = authCubit.verifyEmail(pinController.text);
+          if (await verify) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text("Email verified successfully")),
+            );
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              AppRoutes.home,
+              (route) => false,
+            );
+          } else {
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(const SnackBar(content: Text("try again later")));
+          }
           break;
 
         case VerifySource.forgotPassword:
-          Navigator.pushNamed(context, AppRoutes.resetPassword);
+          final authCubit = context.read<AuthCubit>();
+          await authCubit.checkForgetPassword(
+            widget.email!,
+            pinController.text,
+          );
+          if (authCubit.state == "success") {
+            Navigator.pushNamed(
+              context,
+              AppRoutes.resetPassword,
+              arguments: pinController.text,
+            );
+          }
           break;
       }
     }
@@ -142,7 +167,17 @@ class _VerifyCodePageState extends State<VerifyCodePage> {
               ),
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: () async {
+                final authCubit = context.read<AuthCubit>();
+
+                final resend = await authCubit.resendVerifyCode();
+
+                if (resend) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text("Code resent successfully")),
+                  );
+                }
+              },
               child: Text(
                 LocaleKeys.resend.tr(),
                 style: AppTextStyles.playfairDisplayLarge(

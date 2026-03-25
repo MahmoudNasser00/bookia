@@ -51,7 +51,7 @@ class PasswordChangePage extends StatelessWidget {
               onPressed: () {
                 Navigator.pushNamedAndRemoveUntil(
                   context,
-                  AppRoutes.login,
+                  AppRoutes.WelcomeScreen,
                   (route) => false,
                 );
               },

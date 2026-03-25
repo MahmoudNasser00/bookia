@@ -75,5 +75,8 @@
   "Your_new_password_must_be_unique_from_those_previously_used": "يجب أن تكون كلمة المرور الجديدة الخاصة بك فريدة من نوعها وتختلف عن كلمات المرور التي استخدمتها سابقاً",
   "Your_password_has_been_changed_successfully": "تم تغيير كلمة مرورك بنجاح",
   "No_items_in_favorites": "لا يوجد عناصر في المفضلة",
-  "FAQ": "التعليمات"
+  "No_items_in_cart": "سلة التسوق الخاصة بك فارغة",
+  "FAQ": "التعليمات",
+  "Place_Your_Order": "ضع طلبك"
+
 }

@@ -1,3 +1,4 @@
+import 'package:bookia/features/checkout/cubit/order_cubit.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -24,6 +25,7 @@ void main() async {
           BlocProvider(create: (context) => AuthCubit()),
           BlocProvider(create: (_) => WishlistCubit()..fetchWishlist()),
           BlocProvider(create: (_) => CartCubit()),
+          BlocProvider(create: (_) => OrderCubit()),
           BlocProvider(create: (_) => ProfileCubit()..fetchProfile()),
         ],
         child: const MyApp(),

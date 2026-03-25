@@ -40,6 +40,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   crossAxisAlignment: .start,
                   mainAxisSize: .min,
                   children: [
+                    // title
                     Text(
                       LocaleKeys.forgot_password.tr(),
                       style: AppTextStyles.playfairDisplayLarge(
@@ -51,6 +52,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                       ),
                     ),
                     SizedBox(height: 10.h),
+                    // subtitle
                     Text(
                       LocaleKeys
                           .Dont_worry_It_occurs_Please_enter_the_email_address_linked_with_your_account.tr(),
@@ -62,6 +64,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                       ),
                     ),
                     SizedBox(height: 30.h),
+                    // email
                     CustomTextfield(
                       hintText: LocaleKeys.email.tr(),
                       validator: AppFormValidations.emailValidator,
@@ -72,7 +75,11 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                     SizedBox(height: 38.h),
                     CustomButton(
                       onPressed: () {
-                        forgotPassword(context: context, formKey: _formKey);
+                        forgotPassword(
+                          context: context,
+                          formKey: _formKey,
+                          email: emailController.text,
+                        );
                       },
                       text: LocaleKeys.send_code.tr(),
                       color: AppColors.primary_button_color,

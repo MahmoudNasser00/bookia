@@ -12,7 +12,10 @@ import '../../../../core/widget/custom_button.dart';
 import '../../../../core/widget/custom_textfield.dart';
 
 class ResetPasswordPage extends StatefulWidget {
-  const ResetPasswordPage({Key? key}) : super(key: key);
+  final String verify_code;
+
+  const ResetPasswordPage({Key? key, required this.verify_code})
+    : super(key: key);
 
   @override
   _ResetPasswordPageState createState() => _ResetPasswordPageState();
@@ -50,6 +53,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                   mainAxisAlignment: .center,
                   mainAxisSize: .min,
                   children: <Widget>[
+                    // title
                     Text(
                       LocaleKeys.create_new_password.tr(),
                       style: AppTextStyles.playfairDisplayLarge(
@@ -61,6 +65,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                       ),
                     ),
                     SizedBox(height: 10.h),
+                    // subtitle
                     Text(
                       LocaleKeys
                           .Your_new_password_must_be_unique_from_those_previously_used.tr(),
@@ -72,6 +77,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                       ),
                     ), // password
                     SizedBox(height: 32.h),
+                    // password
                     CustomTextfield(
                       hintText: LocaleKeys.new_password.tr(),
                       isPassword: true,
@@ -99,7 +105,13 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                     CustomButton(
                       text: LocaleKeys.login.tr(),
                       onPressed: () {
-                        resetPassword(context: context, formKey: _formKey);
+                        resetPassword(
+                          context: context,
+                          formKey: _formKey,
+                          verify_code: widget.verify_code,
+                          password: passwordController.text,
+                          confirmPassword: confirmPasswordController.text,
+                        );
                       },
                       color: AppColors.primary_button_color,
                       textColor: AppColors.white,

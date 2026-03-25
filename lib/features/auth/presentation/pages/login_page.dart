@@ -50,6 +50,7 @@ class _LoginPageState extends State<LoginPage> {
                 key: _formKey,
                 child: Column(
                   children: <Widget>[
+                    // title
                     Text(
                       LocaleKeys.welcome_back.tr(),
                       style: AppTextStyles.playfairDisplayLarge(
@@ -80,6 +81,7 @@ class _LoginPageState extends State<LoginPage> {
                       validator: AppFormValidations.passwordValidator,
                     ),
                     SizedBox(height: 13.h),
+                    // forgot password
                     Row(
                       crossAxisAlignment: .center,
                       mainAxisAlignment: .end,

@@ -78,6 +78,9 @@
   "Your_new_password_must_be_unique_from_those_previously_used": "Your new password must be unique from those previously used.",
   "Your_password_has_been_changed_successfully": "Your password has been changed successfully.",
   "No_items_in_favorites": "No items in favorites",
-  "FAQ": "FAQ"
+  "No_items_in_cart": "Your cart is empty",
+  "FAQ": "FAQ",
+  "Place_Your_Order": "Place Your Order"
+
 
 }
