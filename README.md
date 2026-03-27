@@ -1,3 +1,4 @@
+ (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
 diff --git a/README.md b/README.md
 index 62c794d9a7c185aa9172589a0aa2fea5d288edfd..fefe8013995b94e7586b05d1b81a9d2fed98bd4c 100644
 --- a/README.md
@@ -142,3 +143,6 @@ index 62c794d9a7c185aa9172589a0aa2fea5d288edfd..fefe8013995b94e7586b05d1b81a9d2f
 +
 +- This project is configured as a private app (`publish_to: 'none'`).
 +- Generated assets helper is configured through `flutter_gen` (`lib/core/generated/`).
+ 
+EOF
+)
