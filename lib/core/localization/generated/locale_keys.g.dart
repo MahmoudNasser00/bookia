@@ -82,5 +82,6 @@ abstract class  LocaleKeys {
   static const No_items_in_cart = 'No_items_in_cart';
   static const FAQ = 'FAQ';
   static const Place_Your_Order = 'Place_Your_Order';
+  static const No_Orders_Yet = 'No_Orders_Yet';
 
 }

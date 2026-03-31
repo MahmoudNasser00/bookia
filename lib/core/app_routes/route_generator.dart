@@ -1,4 +1,5 @@
 import 'package:bookia/core/network/api_client.dart';
+import 'package:bookia/features/profile/presentation/pages/my_order_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../features/auth/logic/verify_source.dart';
@@ -7,6 +8,7 @@ import '../../features/auth/presentation/pages/welcome.dart';
 import '../../features/home/data/home_data_source.dart';
 import '../../features/home/data/models/product_model.dart';
 import '../../features/home/logic/home_cubit.dart';
+import '../../features/profile/cubit/my_order_cubit.dart';
 import '../../features/search/data/cubit/search_cubit.dart';
 import '../../features/search/data/search_data_source.dart';
 import '../../features/search/presentation/pages/search_page.dart';
@@ -108,6 +110,15 @@ class RouteGenerator {
 
       case AppRoutes.editProfile:
         return _route(settings, const EditProfilePage());
+
+      /// My Order
+      case AppRoutes.myOrder:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => MyOrderCubit(),
+            child: const MyOrderPage(),
+          ),
+        );
 
       /// Default
       default:
