@@ -7,6 +7,7 @@ Bookia is a Flutter e-commerce app for browsing and buying books. It includes au
 ![App Demo 1](assets/Player1.gif)
 ![App Demo 2](assets/Player2.gif)
 ![App Demo 3](assets/Player3.gif)
+![App Demo 4](assets/Player4.gif)
 
 ## Features
 
