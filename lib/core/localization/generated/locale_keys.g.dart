@@ -83,5 +83,6 @@ abstract class  LocaleKeys {
   static const FAQ = 'FAQ';
   static const Place_Your_Order = 'Place_Your_Order';
   static const No_Orders_Yet = 'No_Orders_Yet';
+  static const Your_order_will_be_delivered_soon_Thank_you_for_choosing_our_app = 'Your_order_will_be_delivered_soon_Thank_you_for_choosing_our_app';
 
 }

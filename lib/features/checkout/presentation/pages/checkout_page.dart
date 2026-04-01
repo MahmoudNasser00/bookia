@@ -94,11 +94,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
         const SnackBar(content: Text("Order placed successfully")),
       );
 
-      Navigator.pushNamedAndRemoveUntil(
-        context,
-        AppRoutes.home,
-        (route) => false,
-      );
+      Navigator.pushNamed(context, AppRoutes.successCheckout);
     } else {
       ScaffoldMessenger.of(
         context,

@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../features/auth/logic/verify_source.dart';
 import '../../features/auth/presentation/pages/password_change_page_successful.dart';
 import '../../features/auth/presentation/pages/welcome.dart';
+import '../../features/checkout/presentation/pages/success_checkout_page.dart';
 import '../../features/home/data/home_data_source.dart';
 import '../../features/home/data/models/product_model.dart';
 import '../../features/home/logic/home_cubit.dart';
@@ -104,6 +105,10 @@ class RouteGenerator {
       /// Checkout
       case AppRoutes.checkout:
         return _route(settings, const CheckoutPage());
+
+      /// Success Checkout
+      case AppRoutes.successCheckout:
+        return _route(settings, const SuccessCheckoutPage());
 
       /// Profile
       case AppRoutes.profile:

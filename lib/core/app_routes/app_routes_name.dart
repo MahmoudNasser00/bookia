@@ -15,4 +15,5 @@ sealed class AppRoutes {
   static const String checkout = '/checkout';
   static const String passwordChange = '/password-change';
   static const String myOrder = '/my_order';
+  static const String successCheckout = '/success_checkout';
 }
