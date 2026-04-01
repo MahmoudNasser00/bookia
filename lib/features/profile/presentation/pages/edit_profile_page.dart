@@ -12,8 +12,9 @@ import '../../../../core/widget/custom_appbar.dart';
 import '../../cubit/edit_cubit.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
-import 'package:image_cropper/image_cropper.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
+
+import '../../cubit/edit_state.dart';
 
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({Key? key}) : super(key: key);
@@ -28,25 +29,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
   final TextEditingController addressController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   File? selectedImage;
-  Future<File> cropImage(File imageFile) async {
-    final cropped = await ImageCropper().cropImage(
-      sourcePath: imageFile.path,
-      aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
-      uiSettings: [
-        AndroidUiSettings(toolbarTitle: "Crop Image", lockAspectRatio: true),
-        IOSUiSettings(title: "Crop Image"),
-      ],
-    );
-
-    if (cropped == null) return imageFile;
-
-    return File(cropped.path);
-  }
 
   Future<File> compressImage(File file) async {
+    final targetPath =
+        "${file.parent.path}/compressed_${DateTime.now().millisecondsSinceEpoch}.jpg";
+
     final result = await FlutterImageCompress.compressAndGetFile(
       file.path,
-      "${file.path}_compressed.jpg",
+      targetPath,
       quality: 70,
       minWidth: 800,
       minHeight: 800,
@@ -66,9 +56,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     );
 
     if (image != null) {
-      File cropped = await cropImage(File(image.path));
-
-      File compressed = await compressImage(cropped);
+      File compressed = await compressImage(File(image.path));
 
       setState(() {
         selectedImage = compressed;
@@ -110,100 +98,124 @@ class _EditProfilePageState extends State<EditProfilePage> {
   void initState() {
     super.initState();
 
-    context.read<EditCubit>().fetchProfile();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<EditCubit>().fetchProfile();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          CustomAppBar(
-            onBackPressed: () => Navigator.pop(context),
-            title: LocaleKeys.edit_profile.tr(),
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  mainAxisSize: .max,
-                  crossAxisAlignment: .center,
-                  mainAxisAlignment: .center,
-                  children: [
-                    InkWell(
-                      onTap: pickImageSource,
-                      child: Stack(
-                        alignment: Alignment.bottomRight,
-                        children: [
-                          CircleAvatar(
-                            radius: 60.w,
-                            backgroundImage: selectedImage != null
-                                ? FileImage(selectedImage!)
-                                : null,
-                            child: selectedImage == null
-                                ? Icon(Icons.person, size: 40.sp)
-                                : null,
-                          ),
-                          Icon(
-                            Icons.camera_alt_outlined,
-                            color: AppColors.primary_button_color,
-                            size: 21.sp,
-                          ),
-                        ],
+    return BlocListener<EditCubit, EditState>(
+      listener: (context, state) {
+        if (state is EditSuccess) {
+          Navigator.pushNamedAndRemoveUntil(context, "/home", (route) => false);
+        }
+
+        if (state is EditError) {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(state.message)));
+        }
+      },
+      child: Scaffold(
+        body: CustomScrollView(
+          slivers: [
+            CustomAppBar(
+              onBackPressed: () => Navigator.pop(context),
+              title: LocaleKeys.edit_profile.tr(),
+            ),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisSize: .max,
+                    crossAxisAlignment: .center,
+                    mainAxisAlignment: .center,
+                    children: [
+                      SizedBox(height: 54.h),
+
+                      InkWell(
+                        onTap: pickImageSource,
+                        child: Stack(
+                          alignment: Alignment.bottomRight,
+                          children: [
+                            CircleAvatar(
+                              radius: 60.w,
+                              backgroundImage: selectedImage != null
+                                  ? FileImage(selectedImage!)
+                                  : null,
+                              backgroundColor: Colors.grey.shade200,
+                              child: selectedImage == null
+                                  ? Icon(Icons.person, size: 40.sp)
+                                  : null,
+                            ),
+                            Icon(
+                              Icons.camera_alt_outlined,
+                              color: AppColors.primary_button_color,
+                              size: 21.sp,
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    SizedBox(height: 54.h),
-                    // name
-                    CustomTextfield(
-                      hintText: LocaleKeys.full_name.tr(),
-                      controller: nameController,
-                      keyboardType: TextInputType.name,
-                      inputFormatters: AppFormValidations.userNameFormatter,
-                      validator: AppFormValidations.userNameValidator,
-                    ),
-                    SizedBox(height: 12.h),
-                    // phone
-                    CustomTextfield(
-                      hintText: LocaleKeys.phone.tr(),
-                      controller: phoneController,
-                      keyboardType: TextInputType.number,
-                      inputFormatters: AppFormValidations.phoneFormatter,
-                      validator: AppFormValidations.phoneValidator,
-                    ),
-                    SizedBox(height: 12.h),
-                    // address
-                    CustomTextfield(
-                      hintText: LocaleKeys.address.tr(),
-                      controller: addressController,
-                      keyboardType: TextInputType.streetAddress,
-                    ),
-                  ],
+                      SizedBox(height: 54.h),
+                      // name
+                      CustomTextfield(
+                        hintText: LocaleKeys.full_name.tr(),
+                        controller: nameController,
+                        keyboardType: TextInputType.name,
+                      ),
+                      SizedBox(height: 12.h),
+                      // phone
+                      CustomTextfield(
+                        hintText: LocaleKeys.phone.tr(),
+                        controller: phoneController,
+                        keyboardType: TextInputType.number,
+                        inputFormatters: AppFormValidations.phoneFormatter,
+                        validator: AppFormValidations.phoneValidator,
+                      ),
+                      SizedBox(height: 12.h),
+                      // address
+                      CustomTextfield(
+                        hintText: LocaleKeys.address.tr(),
+                        controller: addressController,
+                        keyboardType: TextInputType.streetAddress,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
-      ),
-      bottomNavigationBar: Padding(
-        padding: EdgeInsets.only(bottom: 22.h, left: 26.w, right: 26.w),
-        child: CustomButton(
-          text: LocaleKeys.update_profile.tr(),
-          color: AppColors.primary_button_color,
-          textColor: AppColors.white,
-          width: 331.w,
-          height: 56.h,
-          onPressed: () {
-            if (_formKey.currentState!.validate()) {
-              context.read<EditCubit>().updateProfile(
-                name: nameController.text,
-                phone: phoneController.text,
-                address: addressController.text,
-                image: selectedImage,
+          ],
+        ),
+        bottomNavigationBar: Padding(
+          padding: EdgeInsets.only(bottom: 22.h, left: 26.w, right: 26.w),
+          child: BlocBuilder<EditCubit, EditState>(
+            builder: (context, state) {
+              return CustomButton(
+                text: state is EditLoading
+                    ? "Updating..."
+                    : LocaleKeys.update_profile.tr(),
+                color: AppColors.primary_button_color,
+                textColor: AppColors.white,
+                width: 331.w,
+                height: 56.h,
+                onPressed: state is EditLoading
+                    ? null
+                    : () {
+                        if (_formKey.currentState!.validate()) {
+                          context.read<EditCubit>().updateProfile(
+                            name: nameController.text,
+                            phone: phoneController.text,
+                            address: addressController.text,
+                            image: selectedImage,
+                          );
+                        }
+                      },
               );
-            }
-          },
+            },
+          ),
         ),
       ),
     );

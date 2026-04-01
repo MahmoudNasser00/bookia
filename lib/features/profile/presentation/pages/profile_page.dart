@@ -109,30 +109,33 @@ class _ProfileTabState extends State<ProfileTab> {
                                 : NetworkImage(profile.image),
                           ),
 
-                          Column(
-                            children: [
-                              Text(
-                                profile?.name ?? "User Name",
-                                style: AppTextStyles.playfairDisplayLarge(
-                                  context,
-                                  fontStyle: FontStyle.normal,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 20.sp,
-                                  color: AppColors.black,
+                          Expanded(
+                            child: Column(
+                              children: [
+                                Text(
+                                  profile?.name ?? "User Name",
+                                  style: AppTextStyles.playfairDisplayLarge(
+                                    context,
+                                    fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 20.sp,
+                                    color: AppColors.black,
+                                  ),
+                                  softWrap: true,
                                 ),
-                              ),
 
-                              Text(
-                                profile?.email ?? "email@email.com",
-                                style: AppTextStyles.playfairDisplayLarge(
-                                  context,
-                                  fontStyle: FontStyle.normal,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 15.sp,
-                                  color: AppColors.hintColor,
+                                Text(
+                                  profile?.email ?? "email@email.com",
+                                  style: AppTextStyles.playfairDisplayLarge(
+                                    context,
+                                    fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 15.sp,
+                                    color: AppColors.hintColor,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ],
                       ),
