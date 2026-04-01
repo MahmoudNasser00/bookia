@@ -1,4 +1,5 @@
 import 'package:bookia/core/network/api_client.dart';
+import 'package:bookia/features/profile/cubit/edit_cubit.dart';
 import 'package:bookia/features/profile/presentation/pages/my_order_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -108,8 +109,15 @@ class RouteGenerator {
       case AppRoutes.profile:
         return _route(settings, const ProfileTab());
 
+      /// edit profile
       case AppRoutes.editProfile:
-        return _route(settings, const EditProfilePage());
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => EditCubit(),
+            child: const EditProfilePage(),
+          ),
+        );
+      // return _route(settings, const EditProfilePage());
 
       /// My Order
       case AppRoutes.myOrder:
