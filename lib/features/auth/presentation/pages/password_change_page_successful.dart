@@ -10,8 +10,8 @@ import '../../../../core/app_themes/app_text_styles.dart';
 import '../../../../core/app_themes/colors/app_colors.dart';
 import '../../../../core/generated/assets.dart';
 
-class PasswordChangePage extends StatelessWidget {
-  const PasswordChangePage({Key? key}) : super(key: key);
+class PasswordChangePageSuccessful extends StatelessWidget {
+  const PasswordChangePageSuccessful({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,6 @@
 import 'package:bookia/core/network/api_client.dart';
 import 'package:bookia/features/profile/cubit/edit_cubit.dart';
+import 'package:bookia/features/profile/cubit/password_changed_cubit.dart';
 import 'package:bookia/features/profile/presentation/pages/my_order_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,6 +12,7 @@ import '../../features/home/data/home_data_source.dart';
 import '../../features/home/data/models/product_model.dart';
 import '../../features/home/logic/home_cubit.dart';
 import '../../features/profile/cubit/my_order_cubit.dart';
+import '../../features/profile/presentation/pages/password_changed.dart';
 import '../../features/search/data/cubit/search_cubit.dart';
 import '../../features/search/data/search_data_source.dart';
 import '../../features/search/presentation/pages/search_page.dart';
@@ -70,8 +72,18 @@ class RouteGenerator {
       case AppRoutes.resetPassword:
         final verify_code = settings.arguments as String;
         return _route(settings, ResetPasswordPage(verify_code: verify_code));
-      case AppRoutes.passwordChange:
-        return _route(settings, const PasswordChangePage());
+      // password change successful
+      case AppRoutes.passwordChangeSuccessful:
+        return _route(settings, const PasswordChangePageSuccessful());
+
+      // password update
+      case AppRoutes.updatePassword:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => PasswordChangedCubit(),
+            child: const PasswordChanged(),
+          ),
+        );
 
       /// Home
       case AppRoutes.home:
@@ -122,7 +134,6 @@ class RouteGenerator {
             child: const EditProfilePage(),
           ),
         );
-      // return _route(settings, const EditProfilePage());
 
       /// My Order
       case AppRoutes.myOrder:

@@ -176,14 +176,19 @@ class _ProfileTabState extends State<ProfileTab> {
                       ),
 
                       SizedBox(height: 10.h),
-                      // reset password
+                      // update password
                       CustomButton(
                         text: LocaleKeys.reset_password.tr(),
                         color: AppColors.white,
                         textColor: AppColors.black,
                         width: double.infinity,
                         height: 54.h,
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(
+                            context,
+                            AppRoutes.updatePassword,
+                          );
+                        },
                         postFiex: Icon(
                           Icons.arrow_forward_ios,
                           color: AppColors.black,

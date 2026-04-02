@@ -21,7 +21,7 @@ Future<void> resetPassword({
     if (authCubit.state == "success" && user != null) {
       Navigator.pushNamedAndRemoveUntil(
         context,
-        AppRoutes.passwordChange,
+        AppRoutes.passwordChangeSuccessful,
         (route) => false,
       );
     } else if (authCubit.state == "error") {
